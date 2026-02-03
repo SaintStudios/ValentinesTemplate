@@ -24,9 +24,9 @@ export interface Step1Data {
   photo: File | null;
 }
 
-// Step 2 data structure for song upload
+// Step 2 data structure for music link
 export interface Step2Data {
-  songFile: File | null;
+  songLink: string;
 }
 
 // Step 3 data structure for background selection
@@ -63,7 +63,7 @@ export interface SurveyErrors {
     photo?: string;
   };
   step2?: {
-    songFile?: string;
+    songLink?: string;
   };
   step3?: {
     backgroundId?: string;
@@ -86,7 +86,7 @@ export interface SurveyStep {
 // Array of all survey steps for iteration
 export const SURVEY_STEPS: SurveyStep[] = [
   { id: 1, name: 'The Date', key: 'step1' },
-  { id: 2, name: 'Music', key: 'step2' },
+  { id: 2, name: 'Set the Mood', key: 'step2' },
   { id: 3, name: 'Scene', key: 'step3' },
   { id: 4, name: 'Message', key: 'step4' },
   { id: 5, name: 'Review', key: 'step5' },

@@ -10,6 +10,7 @@ export async function POST(req: NextRequest) {
       relationship,
       backgroundId,
       cardMessage,
+      songLink,
       instantDelivery,
     } = body;
 
@@ -21,6 +22,9 @@ export async function POST(req: NextRequest) {
           currency: 'eur',
           product_data: {
             name: 'Custom Virtual Date Space',
+            description: instantDelivery
+              ? 'Your personalized virtual date space — ready within 5 minutes'
+              : 'Your personalized virtual date space — delivered within 24 hours',
           },
           unit_amount: 1699,
         },
@@ -34,7 +38,7 @@ export async function POST(req: NextRequest) {
           currency: 'eur',
           product_data: {
             name: 'Instant Delivery',
-            description: 'Skip the ~2 hour wait — get your date space immediately',
+            description: 'Skip the 24 hour wait — get your date space within 5 minutes',
           },
           unit_amount: 2000,
         },
@@ -50,6 +54,7 @@ export async function POST(req: NextRequest) {
         relationship: relationship || '',
         backgroundId: backgroundId || '',
         cardMessage: (cardMessage || '').slice(0, 500),
+        songLink: songLink || '',
         priority_tier: instantDelivery ? 'instant' : 'standard',
       },
       success_url: `${baseUrl}/order/success?session_id={CHECKOUT_SESSION_ID}`,

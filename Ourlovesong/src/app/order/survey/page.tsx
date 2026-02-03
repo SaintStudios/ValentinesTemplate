@@ -8,7 +8,7 @@
 'use client';
 
 import { useCallback, useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { useTranslation } from '@/hooks/useTranslation';
 import { useSurvey } from '@/hooks/useSurvey';
 import { SurveyHeader } from '@/components/survey/survey-header';
@@ -76,6 +76,7 @@ export default function SurveyPage() {
           relationship: surveyData.step1.relationship,
           backgroundId: surveyData.step3.backgroundId,
           cardMessage: surveyData.step4.cardMessage,
+          songLink: surveyData.step2.songLink,
           instantDelivery,
         }),
       });
@@ -147,58 +148,47 @@ export default function SurveyPage() {
             currentStep={currentStep}
             direction={direction}
           >
-            <AnimatePresence mode="wait" initial={false}>
-              <motion.div
-                key={currentStep}
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -10 }}
-                transition={{ duration: 0.25, ease: 'easeOut' }}
-                className="flex-1 min-h-0 flex flex-col justify-start"
-              >
-                {currentStep === 1 && (
-                  <Step1
-                    name={surveyData.step1.name}
-                    photo={surveyData.step1.photo}
-                    errors={errors.step1}
-                    onNameChange={(name) => updateStep1({ name })}
-                    onPhotoChange={(photo) => updateStep1({ photo })}
-                  />
-                )}
+            {currentStep === 1 && (
+              <Step1
+                name={surveyData.step1.name}
+                photo={surveyData.step1.photo}
+                errors={errors.step1}
+                onNameChange={(name) => updateStep1({ name })}
+                onPhotoChange={(photo) => updateStep1({ photo })}
+              />
+            )}
 
-                {currentStep === 2 && (
-                  <Step2
-                    songFile={surveyData.step2.songFile}
-                    errors={errors.step2}
-                    onSongFileChange={(songFile) => updateStep2({ songFile })}
-                  />
-                )}
+            {currentStep === 2 && (
+              <Step2
+                songLink={surveyData.step2.songLink}
+                errors={errors.step2}
+                onSongLinkChange={(songLink) => updateStep2({ songLink })}
+              />
+            )}
 
-                {currentStep === 3 && (
-                  <Step3
-                    backgroundId={surveyData.step3.backgroundId}
-                    errors={errors.step3}
-                    onBackgroundChange={(backgroundId) => updateStep3({ backgroundId })}
-                  />
-                )}
+            {currentStep === 3 && (
+              <Step3
+                backgroundId={surveyData.step3.backgroundId}
+                errors={errors.step3}
+                onBackgroundChange={(backgroundId) => updateStep3({ backgroundId })}
+              />
+            )}
 
-                {currentStep === 4 && (
-                  <Step4
-                    cardMessage={surveyData.step4.cardMessage}
-                    errors={errors.step4}
-                    onCardMessageChange={(cardMessage) => updateStep4({ cardMessage })}
-                  />
-                )}
+            {currentStep === 4 && (
+              <Step4
+                cardMessage={surveyData.step4.cardMessage}
+                errors={errors.step4}
+                onCardMessageChange={(cardMessage) => updateStep4({ cardMessage })}
+              />
+            )}
 
-                {currentStep === 5 && (
-                  <Step5
-                    data={surveyData}
-                    instantDelivery={instantDelivery}
-                    onInstantDeliveryChange={setInstantDelivery}
-                  />
-                )}
-              </motion.div>
-            </AnimatePresence>
+            {currentStep === 5 && (
+              <Step5
+                data={surveyData}
+                instantDelivery={instantDelivery}
+                onInstantDeliveryChange={setInstantDelivery}
+              />
+            )}
           </StepContainer>
 
           {/* Navigation Footer */}

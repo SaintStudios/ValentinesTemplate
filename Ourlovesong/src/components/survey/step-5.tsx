@@ -43,73 +43,47 @@ export function Step5({
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -10 }}
       transition={{ duration: 0.25, ease: 'easeOut' }}
-      className={cn('flex-1 flex flex-col', className)}
+      className={cn('flex-1 min-h-0 flex flex-col', className)}
     >
       {/* Section Heading */}
-      <div className="flex-shrink-0 text-center mb-5 px-2">
+      <div className="flex-shrink-0 text-center mb-3 px-2">
         <h2 className="text-h1 font-serif text-brand-espresso">
           {t('survey.step5.heading')}
         </h2>
-        <p className="text-lg text-brand-mocha mt-2">
+        <p className="text-base text-brand-mocha mt-1">
           {t('survey.step5.subheading')}
         </p>
       </div>
 
       {/* Review Section */}
-      <div className="flex-1 min-h-0 flex flex-col gap-4 overflow-y-auto pr-1">
+      <div className="flex-1 min-h-0 flex flex-col gap-3 overflow-y-auto pr-1">
 
-        {/* The Date */}
-        <div className="bg-white p-4 rounded-md border border-gray-200">
-          <h3 className="text-sm font-medium text-brand-mocha-light uppercase tracking-wider mb-2">
-            {t('survey.steps.step1')}
-          </h3>
-          <div className="grid grid-cols-2 gap-2 text-base">
-            <div>
-              <span className="text-brand-mocha block text-sm">Name</span>
-              <span className="text-brand-espresso font-medium">{data.step1.name}</span>
-            </div>
-            <div>
-              <span className="text-brand-mocha block text-sm">Photo</span>
-              <span className="text-brand-espresso font-medium truncate">
-                {data.step1.photo ? 'Uploaded' : 'None'}
-              </span>
-            </div>
+        {/* Compact Order Summary */}
+        <div className="bg-white rounded-md border border-gray-200 divide-y divide-gray-100">
+          <div className="flex items-center justify-between px-3 py-2">
+            <span className="text-xs font-medium text-brand-mocha-light uppercase tracking-wider">Name</span>
+            <span className="text-sm text-brand-espresso font-medium">{data.step1.name}</span>
           </div>
-        </div>
-
-        {/* Music */}
-        <div className="bg-white p-4 rounded-md border border-gray-200">
-          <h3 className="text-sm font-medium text-brand-mocha-light uppercase tracking-wider mb-2">
-            {t('survey.steps.step2')}
-          </h3>
-          <div>
-            <span className="text-brand-mocha block text-sm">Song</span>
-            <span className="text-brand-espresso font-medium block truncate">
-              {data.step2.songFile ? data.step2.songFile.name : 'None'}
+          <div className="flex items-center justify-between px-3 py-2">
+            <span className="text-xs font-medium text-brand-mocha-light uppercase tracking-wider">Photo</span>
+            <span className="text-sm text-brand-espresso font-medium">{data.step1.photo ? 'Uploaded' : 'None'}</span>
+          </div>
+          <div className="flex items-center justify-between px-3 py-2">
+            <span className="text-xs font-medium text-brand-mocha-light uppercase tracking-wider">Song</span>
+            <span className="text-sm text-brand-espresso font-medium truncate ml-4 max-w-[60%] text-right">
+              {data.step2.songLink || 'None'}
             </span>
           </div>
-        </div>
-
-        {/* Scene */}
-        <div className="bg-white p-4 rounded-md border border-gray-200">
-          <h3 className="text-sm font-medium text-brand-mocha-light uppercase tracking-wider mb-2">
-            {t('survey.steps.step3')}
-          </h3>
-          <div>
-            <span className="text-brand-espresso font-medium">
-              {getBackgroundLabel(data.step3.backgroundId)}
-            </span>
+          <div className="flex items-center justify-between px-3 py-2">
+            <span className="text-xs font-medium text-brand-mocha-light uppercase tracking-wider">Scene</span>
+            <span className="text-sm text-brand-espresso font-medium">{getBackgroundLabel(data.step3.backgroundId)}</span>
           </div>
-        </div>
-
-        {/* Message */}
-        <div className="bg-white p-4 rounded-md border border-gray-200">
-          <h3 className="text-sm font-medium text-brand-mocha-light uppercase tracking-wider mb-2">
-            {t('survey.steps.step4')}
-          </h3>
-          <p className="text-brand-espresso italic text-sm whitespace-pre-wrap max-h-24 overflow-y-auto">
-            &ldquo;{data.step4.cardMessage}&rdquo;
-          </p>
+          <div className="px-3 py-2">
+            <span className="text-xs font-medium text-brand-mocha-light uppercase tracking-wider block mb-1">Message</span>
+            <p className="text-sm text-brand-espresso italic line-clamp-2">
+              &ldquo;{data.step4.cardMessage}&rdquo;
+            </p>
+          </div>
         </div>
 
         {/* Instant Delivery Upsell */}
@@ -150,8 +124,8 @@ export function Step5({
               </div>
               <p className="text-sm text-brand-mocha mt-1">
                 {instantDelivery
-                  ? 'Your date space will be ready right away!'
-                  : 'Standard delivery: ready in ~2 hours'}
+                  ? 'Your date space will be ready within 5 minutes!'
+                  : 'Standard delivery: ready within 24 hours'}
               </p>
             </div>
           </div>

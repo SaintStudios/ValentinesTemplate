@@ -28,7 +28,7 @@ const createEmptySurveyData = (): SurveyData => ({
     photo: null,
   },
   step2: {
-    songFile: null,
+    songLink: '',
   },
   step3: {
     backgroundId: '',
@@ -55,7 +55,7 @@ const loadSurveyData = (): SurveyData => {
       // Note: Files cannot be restored from localStorage, so we reset them to null
       return {
         step1: { ...createEmptySurveyData().step1, ...parsed.step1, photo: null },
-        step2: { ...createEmptySurveyData().step2, ...parsed.step2, songFile: null },
+        step2: { ...createEmptySurveyData().step2, ...parsed.step2 },
         step3: { ...createEmptySurveyData().step3, ...parsed.step3 },
         step4: { ...createEmptySurveyData().step4, ...parsed.step4 },
         step5: { ...createEmptySurveyData().step5, ...parsed.step5 },
@@ -76,7 +76,7 @@ const saveSurveyData = (data: SurveyData): void => {
     const storageData = {
       ...data,
       step1: { ...data.step1, photo: undefined },
-      step2: { ...data.step2, songFile: undefined }
+      step2: { ...data.step2 }
     };
     localStorage.setItem(SURVEY_STORAGE_KEY, JSON.stringify(storageData));
   } catch (error) {
@@ -201,11 +201,6 @@ export function useSurvey() {
     const newErrors: SurveyErrors['step1'] = {};
     let isValid = true;
 
-    if (!surveyData.step1.relationship) {
-      newErrors.relationship = 'Please select who this is for';
-      isValid = false;
-    }
-
     if (!surveyData.step1.name.trim()) {
       newErrors.name = 'Please enter her name';
       isValid = false;
@@ -224,8 +219,8 @@ export function useSurvey() {
     const newErrors: SurveyErrors['step2'] = {};
     let isValid = true;
 
-    if (!surveyData.step2.songFile) {
-      newErrors.songFile = 'Please upload a song';
+    if (!surveyData.step2.songLink.trim()) {
+      newErrors.songLink = 'Please paste a music link';
       isValid = false;
     }
 
@@ -288,9 +283,9 @@ export function useSurvey() {
   const isStepValid = useCallback((): boolean => {
     switch (currentStep) {
       case 1:
-        return !!surveyData.step1.relationship && !!surveyData.step1.name.trim() && !!surveyData.step1.photo;
+        return !!surveyData.step1.name.trim() && !!surveyData.step1.photo;
       case 2:
-        return !!surveyData.step2.songFile;
+        return !!surveyData.step2.songLink.trim();
       case 3:
         return !!surveyData.step3.backgroundId;
       case 4:

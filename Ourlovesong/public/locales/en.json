@@ -25,7 +25,7 @@
     "steps": [
       {
         "title": "Upload Her Favorites",
-        "description": "Upload a photo of her (or you two together) and her favorite song."
+        "description": "Upload a photo of her (or you two together) and paste a Spotify or Apple Music link."
       },
       {
         "title": "Customize The Space",
@@ -117,8 +117,8 @@
         "answer": "Yes, the link is private and only accessible to people you share it with."
       },
       {
-        "question": "What if I don't have a song file?",
-        "answer": "You can search for popular songs in our library or simply upload an MP3 if you have one."
+        "question": "What if I don't have a Spotify or Apple Music account?",
+        "answer": "You can still use any public song link from these platforms. If you can't find the song there, please contact us and we'll help you out."
       }
     ]
   },
@@ -156,6 +156,7 @@
       "name_label": "What is your Girlfriend's Name?",
       "name_placeholder": "Enter her name",
       "gf_image_label": "Upload a photo of her (or you two)",
+      "privacy_note": "Don't worry, it's 100% private",
       "validation": {
         "name_required": "Please enter her name",
         "image_required": "Please upload a photo"
@@ -163,10 +164,10 @@
     },
     "step2": {
       "heading": "Set the Mood",
-      "subheading": "Choose the music she loves.",
-      "song_label": "Upload her favorite song (MP3)",
+      "subheading": "Paste a Spotify or Apple Music link to your song",
+      "song_label": "Song Link",
       "validation": {
-        "song_required": "Please upload a song"
+        "song_required": "Please paste a music link"
       }
     },
     "step3": {

@@ -155,6 +155,11 @@ export function Step1({
             {errors.photo}
           </motion.p>
         )}
+
+        {/* Privacy Note */}
+        <p className="mt-3 text-center text-[10px] text-brand-mocha/60 italic">
+          {t('survey.step1.privacy_note')}
+        </p>
       </div>
     </motion.div>
   );
