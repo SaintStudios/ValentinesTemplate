@@ -1,8 +1,8 @@
 /**
- * Survey Step 5: Special Message
- * 
- * Fifth and final step where users can add a special message.
- * Compact design that fits on screen without scrolling.
+ * Survey Step 5: Review & Delivery Option
+ *
+ * Final step where users review their choices and optionally
+ * select instant delivery before proceeding to checkout.
  */
 
 'use client';
@@ -14,11 +14,15 @@ import { SurveyData } from '@/types/survey';
 
 export interface Step5Props {
   data: SurveyData;
+  instantDelivery?: boolean;
+  onInstantDeliveryChange?: (value: boolean) => void;
   className?: string;
 }
 
 export function Step5({
   data,
+  instantDelivery = false,
+  onInstantDeliveryChange,
   className = '',
 }: Step5Props) {
   const { t } = useTranslation();
@@ -104,12 +108,56 @@ export function Step5({
             {t('survey.steps.step4')}
           </h3>
           <p className="text-brand-espresso italic text-sm whitespace-pre-wrap max-h-24 overflow-y-auto">
-            "{data.step4.cardMessage}"
+            &ldquo;{data.step4.cardMessage}&rdquo;
           </p>
+        </div>
+
+        {/* Instant Delivery Upsell */}
+        <div
+          className={cn(
+            'p-4 rounded-md border-2 transition-colors cursor-pointer',
+            instantDelivery
+              ? 'bg-brand-gold/10 border-brand-gold'
+              : 'bg-white border-gray-200'
+          )}
+          onClick={() => onInstantDeliveryChange?.(!instantDelivery)}
+        >
+          <div className="flex items-start gap-3">
+            <div className="pt-0.5">
+              <div
+                className={cn(
+                  'w-5 h-5 rounded border-2 flex items-center justify-center transition-colors',
+                  instantDelivery
+                    ? 'bg-brand-gold border-brand-gold'
+                    : 'border-gray-300 bg-white'
+                )}
+              >
+                {instantDelivery && (
+                  <svg className="w-3 h-3 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                  </svg>
+                )}
+              </div>
+            </div>
+            <div className="flex-1">
+              <div className="flex items-center justify-between">
+                <span className="text-brand-espresso font-medium">
+                  Get it instantly
+                </span>
+                <span className="text-brand-espresso font-semibold">
+                  +&euro;20.00
+                </span>
+              </div>
+              <p className="text-sm text-brand-mocha mt-1">
+                {instantDelivery
+                  ? 'Your date space will be ready right away!'
+                  : 'Standard delivery: ready in ~2 hours'}
+              </p>
+            </div>
+          </div>
         </div>
 
       </div>
     </motion.div>
   );
 }
-

@@ -26,6 +26,8 @@ export default function SurveyPage() {
 
   const [direction, setDirection] = useState(0);
   const [viewportHeight, setViewportHeight] = useState(0);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [instantDelivery, setInstantDelivery] = useState(false);
 
   const {
     currentStep,
@@ -63,13 +65,43 @@ export default function SurveyPage() {
     };
   }, []);
 
+  const handleSubmit = useCallback(async () => {
+    setIsSubmitting(true);
+    try {
+      const res = await fetch('/api/checkout', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          recipientName: surveyData.step1.name,
+          relationship: surveyData.step1.relationship,
+          backgroundId: surveyData.step3.backgroundId,
+          cardMessage: surveyData.step4.cardMessage,
+          instantDelivery,
+        }),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) throw new Error(data.error || 'Checkout failed');
+
+      window.location.href = data.url;
+    } catch (error) {
+      console.error('Checkout error:', error);
+      setIsSubmitting(false);
+    }
+  }, [surveyData, instantDelivery]);
+
   const handleNext = useCallback(() => {
     const isValid = validateCurrentStep();
     if (isValid) {
-      setDirection(1);
-      nextStep();
+      if (isLastStep) {
+        handleSubmit();
+      } else {
+        setDirection(1);
+        nextStep();
+      }
     }
-  }, [validateCurrentStep, nextStep]);
+  }, [validateCurrentStep, nextStep, isLastStep, handleSubmit]);
 
   const handlePrev = useCallback(() => {
     setDirection(-1);
@@ -161,6 +193,8 @@ export default function SurveyPage() {
                 {currentStep === 5 && (
                   <Step5
                     data={surveyData}
+                    instantDelivery={instantDelivery}
+                    onInstantDeliveryChange={setInstantDelivery}
                   />
                 )}
               </motion.div>
@@ -173,6 +207,7 @@ export default function SurveyPage() {
             isFirstStep={isFirstStep}
             isLastStep={isLastStep}
             canProceed={canProceed}
+            isSubmitting={isSubmitting}
             onBack={handlePrev}
             onNext={handleNext}
           />
