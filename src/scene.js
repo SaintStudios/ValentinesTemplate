@@ -6,8 +6,8 @@ export function createScene() {
     const scene = new THREE.Scene();
 
     // Add fog to smoothly fade objects into the background
-    // Increased far distance to 15 to ensure we don't hide too much
-    scene.fog = new THREE.Fog(0x0a0a0a, 2, 15);
+    // Extended far distance to not affect background
+    scene.fog = new THREE.Fog(0x0a0a0a, 5, 50);
 
     return scene;
 }
@@ -23,11 +23,8 @@ export function loadEnvironment(scene) {
             texture.repeat.x = -1; // Flip if needed for panoramic orientation
             texture.offset.x = 1; // Align flipped texture correctly
 
-            // Create a wide curved backdrop slice (160 degrees) 
-            const thetaLength = Math.PI * 0.88;
-            const thetaStart = Math.PI - (thetaLength / 2); // Center at Math.PI (front)
-
-            const bgGeometry = new THREE.CylinderGeometry(15, 15, 30, 64, 1, true, thetaStart, thetaLength);
+            // Create a full cylinder background that surrounds the scene
+            const bgGeometry = new THREE.CylinderGeometry(10, 10, 30, 64, 1, true);
             const bgMaterial = new THREE.MeshBasicMaterial({
                 map: texture,
                 side: THREE.BackSide,
@@ -36,13 +33,11 @@ export function loadEnvironment(scene) {
             });
             const backgroundPlane = new THREE.Mesh(bgGeometry, bgMaterial);
 
-            // Center it
-            backgroundPlane.position.set(0, 5, 0);
-            backgroundPlane.rotation.y = 0; // Keep it centered in front
+            // Position it lower so the image extends down to table level
+            backgroundPlane.position.set(0, 0, 0);
             scene.add(backgroundPlane);
 
-            // Set background color to match fog
-            scene.background = new THREE.Color(0x0a0a0a);
+            // Don't set solid background color - let the cylinder be the background
             scene.environment = texture;
             console.log('Curved background backdrop loaded');
         },
@@ -61,10 +56,9 @@ export function createCamera() {
         0.1,
         1000
     );
-    // Positioned as if sitting at the table
-    // Table is at y=0, eye level around 1.2
-    camera.position.set(0, 1.2, 4);
-    camera.lookAt(0, 1.2, 0);
+    // Positioned as if sitting at the lowered table
+    camera.position.set(0, -1.5, 4);
+    camera.lookAt(0, -1.5, 0);
     return camera;
 }
 
@@ -86,7 +80,7 @@ export function createRenderer() {
 
 // Floor
 export function createFloor(scene) {
-    const floorGeometry = new THREE.PlaneGeometry(50, 50);
+    const floorGeometry = new THREE.PlaneGeometry(5, 5); // Smaller floor, just under the table
     const floorMaterial = new THREE.MeshStandardMaterial({
         color: 0x0a0a0a,
         roughness: 0.8,

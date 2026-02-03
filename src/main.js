@@ -1,7 +1,8 @@
-import { createScene, createCamera, createRenderer, createFloor, loadEnvironment } from './scene.js';
+import { createScene, createCamera, createRenderer, loadEnvironment } from './scene.js';
 import { createControls } from './controls.js';
 import { setupLighting } from './lighting.js';
-import { loadTable, loadPictureFrame } from './desk.js';
+import { loadTable, loadPictureFrame, loadCard } from './desk.js';
+import { ItemInteraction } from './interaction.js';
 
 // Initialize scene, camera, and renderer
 const scene = createScene();
@@ -14,11 +15,13 @@ document.querySelector('#canvas-container').appendChild(renderer.domElement);
 // Setup controls
 const controls = createControls(camera, renderer);
 
+// Setup item interaction system
+const itemInteraction = new ItemInteraction(camera, renderer, controls);
+
 // Setup lighting and get animated lights
 const { candleLight1, candleLight2 } = setupLighting(scene);
 
-// Add floor
-createFloor(scene);
+// Floor removed - using background image only
 
 // Load Environment
 loadEnvironment(scene);
@@ -29,9 +32,13 @@ async function loadSceneContent() {
         await loadTable(scene);
 
         // Load items on the table
-        await Promise.all([
-            loadPictureFrame(scene)
+        const [frames, card] = await Promise.all([
+            loadPictureFrame(scene),
+            loadCard(scene)
         ]);
+
+        // Register the card as interactable
+        itemInteraction.addInteractableItem(card);
 
         console.log('Scene content loaded!');
     } catch (error) {
@@ -50,6 +57,9 @@ function animate() {
     // Animate candle lights
     candleLight1.intensity = 2 + Math.sin(time * 5) * 0.3;
     candleLight2.intensity = 2 + Math.sin(time * 5 + 1) * 0.3;
+
+    // Update item interaction animations
+    itemInteraction.update();
 
 
 

@@ -7,12 +7,12 @@ export function setupLighting(scene) {
 
     // Warm candle-like point lights
     const candleLight1 = new THREE.PointLight(0xffaa66, 2, 8);
-    candleLight1.position.set(-0.8, 0.75, 0);
+    candleLight1.position.set(-0.8, -1.5, 0);
     candleLight1.castShadow = true;
     scene.add(candleLight1);
 
     const candleLight2 = new THREE.PointLight(0xffaa66, 2, 8);
-    candleLight2.position.set(0.8, 0.75, 0);
+    candleLight2.position.set(0.8, -1.5, 0);
     candleLight2.castShadow = true;
     scene.add(candleLight2);
 
