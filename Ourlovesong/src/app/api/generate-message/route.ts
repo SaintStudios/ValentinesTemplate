@@ -25,14 +25,18 @@ export async function POST(req: NextRequest) {
         }
 
         // Get the model
-        const model = genAI.getGenerativeModel({ model: 'gemini-2.0-flash' });
 
-        // Construct the system prompt
-        // We want the output to be a Valentine's card message.
-        const systemPrompt = `You are a romantic poet and expert at writing Valentine's Day cards. 
-    Write a SHORT, heartfelt, and personal message for a Valentine's Day card based on the user's request.
-    Keep it under 50 words. Do not include quotes around the message. 
-    User request: "${prompt}"`;
+        const model = genAI.getGenerativeModel({
+            model: 'gemini-2.5-flash',
+            generationConfig: {
+                maxOutputTokens: 50, // Force brevity to speed up generation
+                temperature: 0.7,
+            }
+        });
+
+        // Construct a very simple system prompt for speed and genericness
+        const systemPrompt = `Write a short, generic, and sweet Valentine's Day card message based on this theme: "${prompt}".
+        Keep it under 30 words. One sentence is best. No formatting.`;
 
         const result = await model.generateContent(systemPrompt);
         const response = await result.response;

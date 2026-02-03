@@ -52,7 +52,7 @@ export function Step5({
       </div>
 
       {/* Review Section */}
-      <div className="flex-1 flex flex-col gap-4 overflow-y-auto pr-1">
+      <div className="flex-1 min-h-0 flex flex-col gap-4 overflow-y-auto pr-1">
 
         {/* The Date */}
         <div className="bg-white p-4 rounded-md border border-gray-200">
@@ -80,7 +80,7 @@ export function Step5({
           </h3>
           <div>
             <span className="text-brand-mocha block text-sm">Song</span>
-            <span className="text-brand-espresso font-medium truncate">
+            <span className="text-brand-espresso font-medium block truncate">
               {data.step2.songFile ? data.step2.songFile.name : 'None'}
             </span>
           </div>
@@ -103,7 +103,7 @@ export function Step5({
           <h3 className="text-sm font-medium text-brand-mocha-light uppercase tracking-wider mb-2">
             {t('survey.steps.step4')}
           </h3>
-          <p className="text-brand-espresso italic text-sm whitespace-pre-wrap">
+          <p className="text-brand-espresso italic text-sm whitespace-pre-wrap max-h-24 overflow-y-auto">
             "{data.step4.cardMessage}"
           </p>
         </div>

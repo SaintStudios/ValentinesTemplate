@@ -37,10 +37,12 @@ export function SurveyNavigation({
   return (
     <div
       className={cn(
-        'flex-shrink-0 flex items-center justify-between gap-4 pt-4',
+        'relative flex-shrink-0 flex items-center justify-between gap-4 pt-6 pb-1 bg-brand-cream',
         className
       )}
     >
+      {/* Fade shadow above navigation */}
+      <div className="absolute -top-6 left-0 right-0 h-6 bg-gradient-to-t from-brand-cream to-transparent pointer-events-none" />
       {/* Back Button */}
       <Button
         variant="secondary"

@@ -108,7 +108,7 @@ export default function SurveyPage() {
 
       {/* Main Content - Full width, no card, fits in viewport */}
       <div className="flex-1 flex flex-col px-4 md:px-6 lg:px-8 py-4 md:py-6 overflow-hidden">
-        <div className="flex-1 flex flex-col max-w-lg mx-auto w-full">
+        <div className="flex-1 min-h-0 flex flex-col max-w-lg mx-auto w-full">
 
           {/* Step Content */}
           <StepContainer
@@ -122,7 +122,7 @@ export default function SurveyPage() {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -10 }}
                 transition={{ duration: 0.25, ease: 'easeOut' }}
-                className="flex-1 flex flex-col justify-start"
+                className="flex-1 min-h-0 flex flex-col justify-start"
               >
                 {currentStep === 1 && (
                   <Step1

@@ -27,7 +27,14 @@ if (!apiKey) {
 
 const genAI = new GoogleGenerativeAI(apiKey);
 
-const models = ['gemini-1.5-flash', 'gemini-1.5-pro', 'gemini-pro', 'gemini-2.0-flash'];
+const models = [
+    'gemini-2.5-flash',
+    'gemini-2.5-pro',
+    'gemini-2.5-pro-experimental',
+    'gemini-3.0-flash',
+    'gemini-3.0-pro',
+    'gemini-2.0-flash' // Keep as fallback
+];
 
 async function testModels() {
     for (const modelName of models) {

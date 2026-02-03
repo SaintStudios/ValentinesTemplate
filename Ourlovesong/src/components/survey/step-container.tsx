@@ -50,7 +50,7 @@ export function StepContainer({
   }
 
   return (
-    <div className={cn('h-full flex flex-col', className)}>
+    <div className={cn('flex-1 min-h-0 flex flex-col', className)}>
       <AnimatePresence mode="wait" initial={false}>
         <motion.div
           key={currentStep}
@@ -59,7 +59,7 @@ export function StepContainer({
           animate="animate"
           exit="exit"
           transition={{ type: 'spring', stiffness: 300, damping: 30 }}
-          className="h-full flex flex-col"
+          className="flex-1 min-h-0 flex flex-col"
         >
           {children}
         </motion.div>
