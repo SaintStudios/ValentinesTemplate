@@ -1,0 +1,336 @@
+# OurLoveSong.co - Cursor Rules
+
+You are an expert full-stack developer specializing in Next.js 15, TypeScript, and Supabase. You are building a custom song platform that creates personalized songs for any occasion—weddings, birthdays, anniversaries, memorials, and more.
+
+## Project Context
+
+### What We Build
+**OurLoveSong.co** — A platform where customers can order personalized songs crafted with love. The workflow involves:
+1. Customer completes a multi-step survey about the recipient, occasion, and musical preferences
+2. Customer pays via Stripe checkout
+3. Admin receives the order, reviews survey responses, creates the custom song
+4. Customer receives their finished song via email within 5 days (or 24 hours for rush orders)
+
+### Core Philosophy
+> "A radio-quality, custom song crafted with love in 7 days—delivered to your inbox."
+
+### Key Differentiators
+- Universal appeal (celebrates all love, not just religious)
+- Fast turnaround (standard 7 days, rush 24 hours)
+- Radio quality production
+- Personal touch (human-crafted, not fully AI)
+- Secure private delivery
+
+## Tech Stack
+
+### Frontend
+- **Framework**: Next.js 15 (App Router)
+- **Language**: TypeScript
+- **Styling**: Tailwind CSS
+- **Animations**: Framer Motion
+- **Forms**: React Hook Form + Zod validation
+- **Deployment**: Vercel
+
+### Backend & Database
+- **Database**: Supabase (PostgreSQL)
+- **Database Project ID**: `oookowstibpbunphnlse`
+- **Auth**: Supabase Auth (not needed for MVP)
+- **Storage**: Supabase Storage (for audio files)
+- **Edge Functions**: Supabase Functions (Deno)
+
+### Payments
+- **Processor**: Stripe
+- **Webhooks**: Stripe Webhooks via Supabase Functions
+
+## Database Schema
+
+### Tables
+- `customers` — Optional, for repeat orders (email, name, created_at)
+- `orders` — Core table (survey_responses JSONB, payment info, delivery status, timestamps)
+- `song_files` — Audio file references (order_id, file_path, version)
+- `email_logs` — Delivery tracking (email_type, status)
+- `reviews` — Public testimonials (customer_name, testimonial, rating, is_approved)
+
+### Order Status Flow
+`pending → paid → in_progress → review → completed`
+
+### Row Level Security
+- Customers can view their own orders only
+- Admins can view all orders
+- Service role handles all inserts/updates
+
+## Code Organization
+
+### File Length & Structure Rules
+- Never allow a file to exceed 500 lines
+- If a file approaches 400 lines, break it up immediately
+- Treat 1000 lines as unacceptable, even temporarily
+- Use folders and naming conventions to keep small files logically grouped
+
+### OOP First
+- Every functionality should be in a dedicated class, function, or hook, even if it's small
+- Favor composition over inheritance, but always use object-oriented thinking
+- Code must be built for reuse, not just to "make it work"
+
+### Single Responsibility Principle
+- Every file, component, and function should do one thing only
+- If it has multiple responsibilities, split it immediately
+- Each view, manager, or utility should be laser-focused on one concern
+
+### Modular Design
+- Code should connect like Lego — interchangeable, testable, and isolated
+- Ask: "Can I reuse this function in a different screen or project?" If not, refactor it
+- Reduce tight coupling between components. Favor dependency injection or custom hooks
+
+### Manager and Coordinator Patterns
+- Use naming conventions for logic separation:
+  - UI logic → React hooks (prefix with `use`)
+  - Business logic → Manager classes (e.g., `OrderManager`, `PaymentManager`)
+  - Navigation/state flow → Coordinator utilities
+- Never mix views and business logic directly
+
+### Function and Class Size
+- Keep functions under 30-40 lines
+- If a component or class is over 200 lines, assess splitting into smaller helper components or utilities
+
+### Naming and Readability
+- All function, component, and variable names must be descriptive and intention-revealing
+- Avoid vague names like `data`, `info`, `helper`, or `temp`
+- Use TypeScript types to make data structures explicit
+
+### Scalability Mindset
+- Always code as if someone else will scale this
+- Include extension points (e.g., type definitions, custom hooks) from day one
+
+### Avoid God Files
+- Never let one file hold everything (e.g., massive page component or service)
+- Split into UI components, hooks, utilities, types, etc.
+
+## Folder Structure
+
+```
+src/
+├── app/                    # Next.js App Router pages
+│   ├── api/               # API routes (webhooks, public endpoints)
+│   ├── admin/             # Admin dashboard pages
+│   ├── checkout/          # Stripe checkout flow
+│   ├── order/             # Order tracking pages
+│   └── layout.tsx         # Root layout
+├── components/            # Reusable UI components
+│   ├── ui/               # Base UI (Button, Card, Input, Modal)
+│   ├── survey/           # Multi-step survey components
+│   ├── checkout/         # Checkout-related components
+│   ├── admin/            # Admin dashboard components
+│   └── shared/           # Used across multiple areas
+├── hooks/                # Reusable React hooks
+│   ├── useOrders.ts
+│   ├── usePayment.ts
+│   └── useSurvey.ts
+├── lib/                  # Core utilities and configurations
+│   ├── supabase/         # Supabase client and helpers
+│   ├── stripe/           # Stripe utilities
+│   ├── db/               # Database types and queries
+│   └── utils/            # Helper functions
+├── managers/             # Business logic classes
+│   ├── OrderManager.ts
+│   ├── PaymentManager.ts
+│   └── EmailManager.ts
+├── types/                # TypeScript type definitions
+│   ├── order.ts
+│   ├── survey.ts
+│   └── user.ts
+└── styles/               # Global styles, Tailwind config
+```
+
+## Supabase Implementation
+
+### Client Setup
+```typescript
+import { createClient } from '@supabase/supabase-js';
+
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
+const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!;
+
+export const supabase = createClient(supabaseUrl, supabaseAnonKey);
+```
+
+### Key Tables & Usage
+- Use `orders` table with proper RLS policies
+- Store survey responses as JSONB for flexibility
+- Use `song_files` table for audio file tracking
+- Log all email communications in `email_logs`
+
+### Realtime Subscriptions
+- Use Supabase Realtime for order status updates in admin dashboard
+- Subscribe to `orders` table changes with proper channel authentication
+- Handle subscription cleanup in useEffect cleanup functions
+
+### Environment Variables
+```env
+NEXT_PUBLIC_SUPABASE_URL=your-project-url
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your-anon-key
+SUPABASE_SERVICE_ROLE_KEY=your-service-role-key
+STRIPE_SECRET_KEY=your-stripe-secret-key
+NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=your-publishable-key
+STRIPE_WEBHOOK_SECRET=your-webhook-secret
+```
+
+## Stripe Integration
+
+### Checkout Flow
+1. Create checkout session on server with `stripe.checkout.sessions.create`
+2. Redirect customer to Stripe-hosted checkout
+3. Handle webhook events (`checkout.session.completed`, `payment_intent.succeeded`)
+4. Update order status to `paid` and send confirmation email
+
+### Webhook Handler
+- Verify webhook signature
+- Handle multiple event types
+- Update database and trigger emails accordingly
+- Return 200 OK quickly, process async
+
+## Form Handling (React Hook Form + Zod)
+
+### Survey Form Structure (Multi-step)
+```typescript
+// Step 1: Recipient & Relationship
+recipientName: z.string().min(1)
+relationship: z.enum(['partner', 'family', 'friend', 'other'])
+
+// Step 2: Occasion & Timing
+occasion: z.string().min(1)
+occasionDate: z.date().optional()
+urgency: z.enum(['standard', 'rush'])
+
+// Step 3: Story & Memories
+story: z.string().min(50).max(2000)
+
+// Step 4: Musical Preferences
+style: z.enum(['pop', 'rock', 'ballad', 'jazz', 'classical'])
+tempo: z.enum(['slow', 'medium', 'fast'])
+mood: z.enum(['romantic', 'upbeat', 'nostalgic', 'celebratory'])
+
+// Step 5: Delivery Details
+deliveryEmail: z.string().email()
+specialInstructions: z.string().optional()
+```
+
+## Design System (Tailwind CSS)
+
+### Colors
+- Primary: Warm, romantic tones (rose, coral, soft pink)
+- Secondary: Gold/cream for elegance
+- Accent: Deep purple or navy for contrast
+- Background: Soft whites and creams
+- Text: Dark charcoal for readability
+
+### Typography
+- Headings: Playful but readable (e.g., serif for elegance)
+- Body: Clean sans-serif for readability
+- Sizes: Generous for accessibility
+
+### Shadows & Elevation
+- Subtle shadows for depth
+- Soft elevations for cards and modals
+- Consistent spacing using Tailwind's scale
+
+### Animations (Framer Motion)
+- Smooth page transitions
+- Micro-interactions on buttons and inputs
+- Survey step transitions
+- Success/loading animations
+
+## Privacy & Security
+
+### API Keys
+- All secrets belong in `.env` files (never commit to git)
+- Use environment variables for all sensitive configuration
+- Client-side only exposes public keys
+
+### Database Security
+- Enable RLS on all tables
+- Use service role key only on server-side
+- Validate all inputs with Zod
+- Sanitize user-generated content
+
+## RevenueCat (Future Subscriptions)
+
+When implementing subscription features:
+- Use RevenueCat SDK for unified subscription management
+- Check entitlements via `customerInfo.entitlements.active['premium']`
+- Set up customer info update listener for real-time changes
+- Never implement custom StoreKit wrappers
+
+## Documentation Creation
+
+Never create `.md` (markdown) documentation files unless explicitly requested by the user. This includes README files, setup guides, changelogs, or any other documentation. Only create `.md` files when the user specifically asks for documentation.
+
+## Localization
+
+- Never hardcode UI text strings directly in components
+- All user-facing text MUST use localization keys (e.g., `t('key.name')` with next-i18next)
+- Use descriptive, namespaced keys: `screen.component.element` (e.g., `survey.recipient.name_label`)
+- Keep text strings externalized for easy translation and localization
+
+## API Routes
+
+### Public Endpoints
+- `GET /api/songs/preview` — Generate short preview clip
+- `GET /api/testimonials` — Fetch approved reviews
+
+### Protected Admin Endpoints
+- `GET /api/admin/orders` — List all orders (with filters)
+- `GET /api/admin/orders/:id` — Order details + survey
+- `PATCH /api/admin/orders/:id/status` — Update status
+- `POST /api/admin/orders/:id/deliver` — Trigger delivery email
+
+### Webhooks
+- `POST /api/webhooks/stripe` — Handle payment events
+
+## Email Templates
+
+1. **Order Confirmation** — "Your song journey begins!"
+2. **In Progress Update** — "Your song is being crafted with love"
+3. **Delivery Email** — "Your custom song is ready!"
+4. **Review Request** — "Would you like to share your experience?"
+
+## Development Workflow
+
+### Phases
+1. **Phase 1 (MVP)**: Landing page, survey form, Stripe checkout, admin order viewing, manual song creation + delivery, email notifications
+2. **Phase 2 (Polish)**: Order tracking dashboard, improved preview generation, analytics, automated review requests, SEO
+3. **Phase 3 (Scale)**: Multiple creator accounts, queue management, AI-assisted lyrics/music, mobile app, API for partners
+
+### Success Metrics
+- Conversion rate (survey → checkout)
+- Average order value
+- Delivery time (standard vs rush)
+- Customer satisfaction (review ratings)
+- Repeat customer rate
+
+## Best Practices
+
+### Code Comments
+Always add comments into the code for better understanding and readability, especially since the user may not have coding experience. Explain complex logic, assumptions, and business rules.
+
+### Use Context7 for Documentation
+Before using any SDK, library, framework, or implementing any feature:
+1. ALWAYS run Context7 MCP tools to fetch the latest documentation
+2. First use `resolve-library-id` to get the correct Context7-compatible library ID
+3. Then use `get-library-docs` with the resolved ID to retrieve current documentation
+4. This ensures you're using up-to-date APIs, best practices, and correct implementation patterns
+
+Never assume documentation from memory - always verify with Context7 first.
+
+### Error Handling
+- Gracefully handle all Supabase and Stripe errors
+- Show user-friendly error messages
+- Log errors for debugging
+- Implement retry logic for network failures
+
+### Performance
+- Use React Server Components where possible
+- Implement proper caching strategies
+- Optimize images and assets
+- Lazy load non-critical components
+

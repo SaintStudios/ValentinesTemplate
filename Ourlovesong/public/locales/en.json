@@ -1,0 +1,248 @@
+{
+  "nav": {
+    "examples": "Examples",
+    "testimonials": "Reviews",
+    "faq": "FAQ",
+    "create_song": "Create a Song"
+  },
+  "hero": {
+    "badge": "#1 Custom Love Song Platform",
+    "title": "This Song Brought Me To Tears!",
+    "subtitle": "Surprise your loved one with a custom love song they'll never forget.",
+    "cta_primary": "Create Your Song",
+    "cta_secondary": "Listen to Samples",
+    "testimonial": {
+      "quote": "When I played this song for my wife on our anniversary, she didn't just hear music, she heard our entire story. There wasn't a dry eye in the room.",
+      "author": "Michael R.",
+      "song_title": "Our Forever Story",
+      "initials": "MR"
+    }
+  },
+  "how_it_works": {
+    "title": "How OurLoveSong Works",
+    "subtitle": "",
+    "cta_text": "",
+    "steps": [
+      {
+        "title": "Fill out the survey",
+        "description": ""
+      },
+      {
+        "title": "We create your song",
+        "description": ""
+      },
+      {
+        "title": "Delivered in 5 days to your email",
+        "description": ""
+      }
+    ]
+  },
+  "examples": {
+    "title": "Songs People Have Loved",
+    "subtitle": "Every song we create is unique, but here are a few examples of the magic we've crafted for families just like yours.",
+    "note": "Each song is custom-created based on your story, these are just samples of style and quality.",
+    "items": [
+      {
+        "title": "Forever Yours",
+        "category": "Wedding",
+        "duration": "3:24"
+      },
+      {
+        "title": "Golden Years",
+        "category": "Anniversary",
+        "duration": "2:58"
+      },
+      {
+        "title": "My Little Star",
+        "category": "Birthday",
+        "duration": "3:12"
+      },
+      {
+        "title": "Remembering You",
+        "category": "Memorial",
+        "duration": "3:45"
+      }
+    ]
+  },
+  "testimonials": {
+    "title": "Stories That Made Us Cry (In a Good Way)",
+    "subtitle": "Don't just take our word for it, hear from the people who've given and received songs that touched their souls.",
+    "stats": "Over 2,000 songs delivered with love",
+    "items": [
+      {
+        "quote": "This song brought me to tears! It's absolutely beautiful and captured our story perfectly.",
+        "author": "Sarah M.",
+        "song_title": "Our Love Story",
+        "initials": "SM"
+      },
+      {
+        "quote": "We couldn't believe how personal and meaningful the lyrics were. It made our anniversary so special.",
+        "author": "James & Lisa",
+        "song_title": "Twenty Years Strong",
+        "initials": "JL"
+      },
+      {
+        "quote": "The quality is amazing and the delivery was so fast. Highly recommend for any occasion!",
+        "author": "Michael R.",
+        "song_title": "Dad's Theme",
+        "initials": "MR"
+      },
+      {
+        "quote": "A beautiful tribute to my grandmother. The whole family was moved by this gift.",
+        "author": "Emily K.",
+        "song_title": "Grandma's Garden",
+        "initials": "EK"
+      },
+      {
+        "quote": "Professional quality, heartfelt lyrics, and exceptional service. Will definitely order again!",
+        "author": "David T.",
+        "song_title": "My Best Friend",
+        "initials": "DT"
+      },
+      {
+        "quote": "The perfect gift for our wedding. Everyone who hears it says it's magical.",
+        "author": "Alex & Jordan",
+        "song_title": "Forever Yours",
+        "initials": "AJ"
+      }
+    ]
+  },
+  "faq": {
+    "title": "Questions We Love to Answer",
+    "subtitle": "Everything you need to know about creating a song that touches hearts.",
+    "contact_text": "Have a question we haven't answered here? We'd love to hear from you.",
+    "questions": [
+      {
+        "question": "How personalized is the song, really?",
+        "answer": "Extremely. We don't use templates or generic lyrics. Every verse draws from your specific memories, inside jokes, and the unique qualities you share about the person. You'll receive something that could only exist because of your relationship."
+      },
+      {
+        "question": "What's the turnaround time?",
+        "answer": "Our standard delivery is 7 days from when you complete your order. Need it sooner? Our rush service delivers within 24 hours, just look for the rush option during checkout."
+      },
+      {
+        "question": "What if I'm not sure about the lyrics or style?",
+        "answer": "You'll review and approve the lyrics before we finalize the recording. We want it to be perfect for you. Our team will work with you on any adjustments until it feels just right."
+      },
+      {
+        "question": "Can I get a rush order for a special occasion?",
+        "answer": "Absolutely. Select the rush option at checkout, and we'll prioritize your song for delivery within 24 hours. We understand that some moments can't wait."
+      },
+      {
+        "question": "What music styles do you offer?",
+        "answer": "Choose from pop, rock, ballad, jazz, classical, or describe your own vision. Our musicians are versatile and will match the style to the emotion you want to convey."
+      },
+      {
+        "question": "How is the song delivered?",
+        "answer": "You'll receive a high-quality digital download link via email, plus the option to add a beautifully designed digital greeting card. Rush orders are handled with extra care to meet your deadline."
+      }
+    ]
+  },
+  "categories": {
+    "title": "Songs for Every Love Story",
+    "subtitle": "Whether you're celebrating romance, family, friendship, or honoring memory, we'll help you find the perfect words.",
+    "cta_text": "Not sure which category fits? Just start creating and we'll help you along the way.",
+    "partner": {
+      "title": "For Your Partner",
+      "description": "Anniversaries, Valentine's Day, or just because, tell them exactly what they mean to you in a way words alone never could."
+    },
+    "children": {
+      "title": "For Children",
+      "description": "Capture the magic of their childhood, celebrate their milestones, or leave them a message they'll treasure when they're all grown up."
+    },
+    "parents": {
+      "title": "For Parents",
+      "description": "Honor everything they've done for you, celebrate their legacy, or simply say thank you for the love that shaped who you are."
+    },
+    "friends": {
+      "title": "For Friends",
+      "description": "The family you choose deserves a song too. Celebrate the bond that no blood relation could ever define."
+    },
+    "anniversary": {
+      "title": "Anniversary Songs",
+      "description": "Commemorate years of love and partnership with a song that tells the story of your journey together."
+    },
+    "memorial": {
+      "title": "Memorial Tributes",
+      "description": "Keep memories alive with a beautiful tribute that celebrates a life well-lived and the love that remains."
+    }
+  },
+  "common": {
+    "loading": "Loading..."
+  },
+  "survey": {
+    "step_indicator": "Step {{step}} of {{total}}",
+    "progress": "{{percent}}% Complete",
+    "coming_soon": "Coming Soon",
+    "step1": {
+      "heading": "Let's start with the basics",
+      "subheading": "Tell us about the special person in your life",
+      "relationship_label": "Who's this for?",
+      "name_label": "What's their name?",
+      "name_placeholder": "Enter their first name",
+      "pronunciation_tip": "Tip: add pronunciation for clarity (e.g. Alicia: ah-lee-sha)",
+      "pronunciation_label": "Pronunciation (optional)",
+      "pronunciation_placeholder": "e.g. ah-lee-sha",
+      "validation": {
+        "relationship_required": "Please select who this song is for",
+        "name_required": "Please enter their name"
+      }
+    },
+    "step2": {
+      "heading": "Choose a Genre",
+      "subheading": "What style of music feels right?",
+      "genre_label": "Preferred Genre",
+      "custom_genre_label": "Tell us about your custom genre",
+      "custom_genre_placeholder": "Describe your genre preference",
+      "validation": {
+        "genre_required": "Please select a genre"
+      }
+    },
+    "step3": {
+      "heading": "What makes them special?",
+      "subheading": "Describe their character and the qualities you love most",
+      "qualities_label": "Their beautiful qualities",
+      "qualities_placeholder": "Are they patient, wise, funny, protective, encouraging? What makes them the incredible person they are?",
+      "validation": {
+        "qualities_required": "Please describe their qualities"
+      }
+    },
+    "step4": {
+      "heading": "Share your favorite memories",
+      "subheading": "What moments with them do you treasure most?",
+      "memories_label": "Special moments together",
+      "memories_placeholder": "Share how you met, special years, inside jokes, or moments that made your relationship unique...",
+      "validation": {
+        "memories_required": "Please share your memories"
+      }
+    },
+    "step5": {
+      "heading": "A message from your heart",
+      "subheading": "Write anything else that you feel would be relevant to include in your song, and we'll do our best to include it!",
+      "message_label": "Special message",
+      "message_placeholder": "What do you want them to know, feel, or remember?",
+      "validation": {
+        "message_required": "Please add a special message"
+      }
+    },
+    "navigation": {
+      "back": "Back",
+      "next": "Next",
+      "submit": "Continue to Checkout",
+      "terms_agreement": "By continuing, you agree to our Terms of Service and Privacy Policy."
+    },
+    "trust_message": "Secure checkout powered by Stripe",
+    "relationships": {
+      "husband": "Husband",
+      "wife": "Wife",
+      "children": "Children",
+      "father": "Father",
+      "mother": "Mother",
+      "sibling": "Sibling",
+      "friend": "Friend",
+      "myself": "Myself",
+      "other": "Other"
+    }
+  }
+}
+
