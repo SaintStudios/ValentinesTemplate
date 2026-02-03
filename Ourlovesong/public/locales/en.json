@@ -3,168 +3,144 @@
     "examples": "Examples",
     "testimonials": "Reviews",
     "faq": "FAQ",
-    "create_song": "Create a Song"
+    "create_song": "Create Date Space"
   },
   "hero": {
-    "badge": "#1 Custom Love Song Platform",
-    "title": "This Song Brought Me To Tears!",
-    "subtitle": "Surprise your loved one with a custom love song they'll never forget.",
-    "cta_primary": "Create Your Song",
-    "cta_secondary": "Listen to Samples",
+    "badge": "#1 Virtual Valentine's Gift",
+    "title": "A Romantic 3D Date Night, Given With Love",
+    "subtitle": "Create a personalized 3D virtual date space with her favorite song, photos, and a heartfelt message.",
+    "cta_primary": "Create Date Space",
+    "cta_secondary": "View Examples",
     "testimonial": {
-      "quote": "When I played this song for my wife on our anniversary, she didn't just hear music, she heard our entire story. There wasn't a dry eye in the room.",
+      "quote": "She cried when she saw her photo in the frame and heard our song playing. It felt like we were really there.",
       "author": "Michael R.",
-      "song_title": "Our Forever Story",
+      "song_title": "Parisian Sunset Date",
       "initials": "MR"
     }
   },
   "how_it_works": {
-    "title": "How OurLoveSong Works",
+    "title": "How It Works",
     "subtitle": "",
     "cta_text": "",
     "steps": [
       {
-        "title": "Fill out the survey",
-        "description": ""
+        "title": "Upload Her Favorites",
+        "description": "Upload a photo of her (or you two together) and her favorite song."
       },
       {
-        "title": "We create your song",
-        "description": ""
+        "title": "Customize The Space",
+        "description": "Choose a romantic background and write a personal message for the card on the table."
       },
       {
-        "title": "Delivered in 5 days to your email",
-        "description": ""
+        "title": "Send Her The Link",
+        "description": "She receives a link to explore her personalized 3D date night space."
       }
     ]
   },
   "examples": {
-    "title": "Songs People Have Loved",
-    "subtitle": "Every song we create is unique, but here are a few examples of the magic we've crafted for families just like yours.",
-    "note": "Each song is custom-created based on your story, these are just samples of style and quality.",
+    "title": "Virtual Spaces Created With Love",
+    "subtitle": "Every space is unique. Here are a few examples of the magic we've crafted for couples.",
+    "note": "Each space is custom-created with your photos and song.",
     "items": [
       {
-        "title": "Forever Yours",
-        "category": "Wedding",
-        "duration": "3:24"
+        "title": "Parisian Sunset",
+        "category": "Romantic",
+        "duration": "View"
       },
       {
-        "title": "Golden Years",
-        "category": "Anniversary",
-        "duration": "2:58"
+        "title": "Cozy Cabin",
+        "category": "Intimate",
+        "duration": "View"
       },
       {
-        "title": "My Little Star",
-        "category": "Birthday",
-        "duration": "3:12"
+        "title": "Beachside Picnic",
+        "category": "Relaxing",
+        "duration": "View"
       },
       {
-        "title": "Remembering You",
-        "category": "Memorial",
-        "duration": "3:45"
+        "title": "City Lights",
+        "category": "Modern",
+        "duration": "View"
       }
     ]
   },
   "testimonials": {
-    "title": "Stories That Made Us Cry (In a Good Way)",
-    "subtitle": "Don't just take our word for it, hear from the people who've given and received songs that touched their souls.",
-    "stats": "Over 2,000 songs delivered with love",
+    "title": "Moments That Melted Hearts",
+    "subtitle": "Hear from boyfriends who made this Valentine's Day unforgettable.",
+    "stats": "Over 500 date nights created",
     "items": [
       {
-        "quote": "This song brought me to tears! It's absolutely beautiful and captured our story perfectly.",
+        "quote": "I'm deployed right now, so we couldn't go out. This was the next best thing. She loved the virtual card.",
         "author": "Sarah M.",
-        "song_title": "Our Love Story",
+        "song_title": "Long Distance Date",
         "initials": "SM"
       },
       {
-        "quote": "We couldn't believe how personal and meaningful the lyrics were. It made our anniversary so special.",
+        "quote": "Simple to set up, but the reaction was priceless. She screenshotted every angle.",
         "author": "James & Lisa",
-        "song_title": "Twenty Years Strong",
+        "song_title": "Anniversary Suprise",
         "initials": "JL"
       },
       {
-        "quote": "The quality is amazing and the delivery was so fast. Highly recommend for any occasion!",
+        "quote": "The 3D effect is really cool. Feels very high effort for something that took me 5 minutes to make.",
         "author": "Michael R.",
-        "song_title": "Dad's Theme",
+        "song_title": "First Valentine's",
         "initials": "MR"
       },
       {
-        "quote": "A beautiful tribute to my grandmother. The whole family was moved by this gift.",
-        "author": "Emily K.",
-        "song_title": "Grandma's Garden",
-        "initials": "EK"
-      },
-      {
-        "quote": "Professional quality, heartfelt lyrics, and exceptional service. Will definitely order again!",
+        "quote": "She played it on her phone and just sat there smiling at our photo on the virtual table. distinct win.",
         "author": "David T.",
-        "song_title": "My Best Friend",
+        "song_title": "Just Because",
         "initials": "DT"
-      },
-      {
-        "quote": "The perfect gift for our wedding. Everyone who hears it says it's magical.",
-        "author": "Alex & Jordan",
-        "song_title": "Forever Yours",
-        "initials": "AJ"
       }
     ]
   },
   "faq": {
-    "title": "Questions We Love to Answer",
-    "subtitle": "Everything you need to know about creating a song that touches hearts.",
-    "contact_text": "Have a question we haven't answered here? We'd love to hear from you.",
+    "title": "Common Questions",
+    "subtitle": "Everything you need to know about creating her perfect virtual date.",
+    "contact_text": "Have a question? We'd love to hear from you.",
     "questions": [
       {
-        "question": "How personalized is the song, really?",
-        "answer": "Extremely. We don't use templates or generic lyrics. Every verse draws from your specific memories, inside jokes, and the unique qualities you share about the person. You'll receive something that could only exist because of your relationship."
+        "question": "Does she need a VR headset?",
+        "answer": "No! It works perfectly on any smartphone, tablet, or laptop. She can look around by dragging or moving her phone."
       },
       {
-        "question": "What's the turnaround time?",
-        "answer": "Our standard delivery is 7 days from when you complete your order. Need it sooner? Our rush service delivers within 24 hours, just look for the rush option during checkout."
+        "question": "How long does it take to make?",
+        "answer": "It takes about 5 minutes for you to upload the photo and song and write the note. We generate the link instantly after payment."
       },
       {
-        "question": "What if I'm not sure about the lyrics or style?",
-        "answer": "You'll review and approve the lyrics before we finalize the recording. We want it to be perfect for you. Our team will work with you on any adjustments until it feels just right."
+        "question": "Can I change the song later?",
+        "answer": "Yes, you can edit your date space details up to 24 hours after creation."
       },
       {
-        "question": "Can I get a rush order for a special occasion?",
-        "answer": "Absolutely. Select the rush option at checkout, and we'll prioritize your song for delivery within 24 hours. We understand that some moments can't wait."
+        "question": "Is it private?",
+        "answer": "Yes, the link is private and only accessible to people you share it with."
       },
       {
-        "question": "What music styles do you offer?",
-        "answer": "Choose from pop, rock, ballad, jazz, classical, or describe your own vision. Our musicians are versatile and will match the style to the emotion you want to convey."
-      },
-      {
-        "question": "How is the song delivered?",
-        "answer": "You'll receive a high-quality digital download link via email, plus the option to add a beautifully designed digital greeting card. Rush orders are handled with extra care to meet your deadline."
+        "question": "What if I don't have a song file?",
+        "answer": "You can search for popular songs in our library or simply upload an MP3 if you have one."
       }
     ]
   },
   "categories": {
-    "title": "Songs for Every Love Story",
-    "subtitle": "Whether you're celebrating romance, family, friendship, or honoring memory, we'll help you find the perfect words.",
-    "cta_text": "Not sure which category fits? Just start creating and we'll help you along the way.",
+    "title": "Perfect For Every Couple",
+    "subtitle": "Customize the vibe to match your relationship.",
+    "cta_text": "Start creating your date space now.",
     "partner": {
-      "title": "For Your Partner",
-      "description": "Anniversaries, Valentine's Day, or just because, tell them exactly what they mean to you in a way words alone never could."
+      "title": "For Your Girlfriend",
+      "description": "Make her feel special with a thoughtful, unique digital experience."
     },
     "children": {
-      "title": "For Children",
-      "description": "Capture the magic of their childhood, celebrate their milestones, or leave them a message they'll treasure when they're all grown up."
+      "title": "Long Distance",
+      "description": "Bridge the gap with a shared virtual space when you can't be there in person."
     },
     "parents": {
-      "title": "For Parents",
-      "description": "Honor everything they've done for you, celebrate their legacy, or simply say thank you for the love that shaped who you are."
+      "title": "Anniversaries",
+      "description": "Recreate a special memory or just celebrate another year together."
     },
     "friends": {
-      "title": "For Friends",
-      "description": "The family you choose deserves a song too. Celebrate the bond that no blood relation could ever define."
-    },
-    "anniversary": {
-      "title": "Anniversary Songs",
-      "description": "Commemorate years of love and partnership with a song that tells the story of your journey together."
-    },
-    "memorial": {
-      "title": "Memorial Tributes",
-      "description": "Keep memories alive with a beautiful tribute that celebrates a life well-lived and the love that remains."
+      "title": "Just Because",
+      "description": "You don't need a holiday to show you care."
     }
   },
   "common": {
@@ -175,55 +151,51 @@
     "progress": "{{percent}}% Complete",
     "coming_soon": "Coming Soon",
     "step1": {
-      "heading": "Let's start with the basics",
-      "subheading": "Tell us about the special person in your life",
-      "relationship_label": "Who's this for?",
-      "name_label": "What's their name?",
-      "name_placeholder": "Enter their first name",
-      "pronunciation_tip": "Tip: add pronunciation for clarity (e.g. Alicia: ah-lee-sha)",
-      "pronunciation_label": "Pronunciation (optional)",
-      "pronunciation_placeholder": "e.g. ah-lee-sha",
+      "heading": "Let's start with her",
+      "subheading": "Who is this lucky lady?",
+      "name_label": "What is your Girlfriend's Name?",
+      "name_placeholder": "Enter her name",
+      "gf_image_label": "Upload a photo of her (or you two)",
       "validation": {
-        "relationship_required": "Please select who this song is for",
-        "name_required": "Please enter their name"
+        "name_required": "Please enter her name",
+        "image_required": "Please upload a photo"
       }
     },
     "step2": {
-      "heading": "Choose a Genre",
-      "subheading": "What style of music feels right?",
-      "genre_label": "Preferred Genre",
-      "custom_genre_label": "Tell us about your custom genre",
-      "custom_genre_placeholder": "Describe your genre preference",
+      "heading": "Set the Mood",
+      "subheading": "Choose the music she loves.",
+      "song_label": "Upload her favorite song (MP3)",
       "validation": {
-        "genre_required": "Please select a genre"
+        "song_required": "Please upload a song"
       }
     },
     "step3": {
-      "heading": "What makes them special?",
-      "subheading": "Describe their character and the qualities you love most",
-      "qualities_label": "Their beautiful qualities",
-      "qualities_placeholder": "Are they patient, wise, funny, protective, encouraging? What makes them the incredible person they are?",
+      "heading": "Pick the Scene",
+      "subheading": "Where should this date take place?",
+      "background_label": "Choose a Background",
+      "background_options": {
+        "paris": "Parisian Balcony",
+        "beach": "Sunset Beach",
+        "mountain": "Cozy Mountain Cabin"
+      },
       "validation": {
-        "qualities_required": "Please describe their qualities"
+        "background_required": "Please select a background"
       }
     },
     "step4": {
-      "heading": "Share your favorite memories",
-      "subheading": "What moments with them do you treasure most?",
-      "memories_label": "Special moments together",
-      "memories_placeholder": "Share how you met, special years, inside jokes, or moments that made your relationship unique...",
+      "heading": "Write the Card",
+      "subheading": "What do you want to say to her?",
+      "card_label": "Your Message",
+      "card_placeholder": "Happy Valentine's Day! I love you because...",
+      "ai_placeholder": "e.g., Funny, Romantic quote, For Long Distance...",
       "validation": {
-        "memories_required": "Please share your memories"
+        "message_required": "Please write a message"
       }
     },
     "step5": {
-      "heading": "A message from your heart",
-      "subheading": "Write anything else that you feel would be relevant to include in your song, and we'll do our best to include it!",
-      "message_label": "Special message",
-      "message_placeholder": "What do you want them to know, feel, or remember?",
-      "validation": {
-        "message_required": "Please add a special message"
-      }
+      "heading": "Review",
+      "subheading": "Does everything look perfect?",
+      "validation": {}
     },
     "navigation": {
       "back": "Back",
@@ -245,4 +217,3 @@
     }
   }
 }
-

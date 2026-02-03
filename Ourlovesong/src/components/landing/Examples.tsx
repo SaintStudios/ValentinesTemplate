@@ -8,11 +8,9 @@ import { Card } from "@/components/ui/Card";
 import { CreateSongButton } from "@/components/shared/CreateSongButton";
 
 interface SongExample {
-  id: string;
   title: string;
   category: string;
   duration: string;
-  isPlaying: boolean;
 }
 
 const containerVariants = {
@@ -36,64 +34,18 @@ const itemVariants = {
   },
 };
 
-function AudioPlayer({
-  duration,
-  isPlaying,
-  onToggle,
-}: {
-  duration: string;
-  isPlaying: boolean;
-  onToggle: () => void;
-}) {
-  const [progress, setProgress] = useState(0);
 
-  return (
-    <div className="flex items-center gap-3">
-      <button
-        onClick={onToggle}
-        className="w-10 h-10 rounded-full bg-brand-gold flex items-center justify-center text-white hover:bg-brand-gold-light transition-colors"
-        aria-label={isPlaying ? "Pause" : "Play"}
-      >
-        {isPlaying ? (
-          <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-            <path d="M6 4h4v16H6V4zm8 0h4v16h-4V4z" />
-          </svg>
-        ) : (
-          <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-            <path d="M8 5v14l11-7z" />
-          </svg>
-        )}
-      </button>
-      <div className="flex-1">
-        <div className="flex items-center justify-between mb-1">
-          <span className="text-xs text-brand-mocha">{duration}</span>
-        </div>
-        <div className="h-1 bg-gray-200 rounded-full overflow-hidden">
-          <div
-            className="h-full bg-brand-gold rounded-full transition-all duration-300"
-            style={{ width: `${progress}%` }}
-          />
-        </div>
-      </div>
-    </div>
-  );
-}
 
 export function Examples() {
-  const [playingId, setPlayingId] = useState<string | null>(null);
   const { t } = useTranslation();
 
-  // Generate song examples from translations
+  // Generate date space examples from translations
   const songExamples: SongExample[] = [
-    { id: "1", title: t("examples.items.0.title"), category: t("examples.items.0.category"), duration: t("examples.items.0.duration"), isPlaying: false },
-    { id: "2", title: t("examples.items.1.title"), category: t("examples.items.1.category"), duration: t("examples.items.1.duration"), isPlaying: false },
-    { id: "3", title: t("examples.items.2.title"), category: t("examples.items.2.category"), duration: t("examples.items.2.duration"), isPlaying: false },
-    { id: "4", title: t("examples.items.3.title"), category: t("examples.items.3.category"), duration: t("examples.items.3.duration"), isPlaying: false },
+    { title: t("examples.items.0.title"), category: t("examples.items.0.category"), duration: t("examples.items.0.duration") },
+    { title: t("examples.items.1.title"), category: t("examples.items.1.category"), duration: t("examples.items.1.duration") },
+    { title: t("examples.items.2.title"), category: t("examples.items.2.category"), duration: t("examples.items.2.duration") },
+    { title: t("examples.items.3.title"), category: t("examples.items.3.category"), duration: t("examples.items.3.duration") },
   ];
-
-  const handlePlayToggle = (id: string) => {
-    setPlayingId(playingId === id ? null : id);
-  };
 
   return (
     <Section variant="cream" size="lg" id="examples">
@@ -122,8 +74,8 @@ export function Examples() {
           viewport={{ once: true }}
           className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6"
         >
-          {songExamples.map((song) => (
-            <motion.div key={song.id} variants={itemVariants}>
+          {songExamples.map((song, idx) => (
+            <motion.div key={idx} variants={itemVariants}>
               <Card variant="elevated" padding="md" className="h-full">
                 {/* Placeholder Album Art */}
                 <div className="aspect-square bg-brand-cream-dark rounded-lg mb-4 flex items-center justify-center relative overflow-hidden">
@@ -148,11 +100,15 @@ export function Examples() {
                 </div>
 
                 {/* Audio Player */}
-                <AudioPlayer
-                  duration={song.duration}
-                  isPlaying={playingId === song.id}
-                  onToggle={() => handlePlayToggle(song.id)}
-                />
+                {/* View Button */}
+                <div className="flex justify-end">
+                  <button className="text-sm font-semibold text-brand-gold hover:text-brand-gold-dark transition-colors flex items-center gap-1 group/btn">
+                    {song.duration}
+                    <svg className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                    </svg>
+                  </button>
+                </div>
               </Card>
             </motion.div>
           ))}

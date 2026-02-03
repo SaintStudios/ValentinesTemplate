@@ -23,10 +23,10 @@ import { cn } from '@/lib/utils';
 
 export default function SurveyPage() {
   const { t } = useTranslation();
-  
+
   const [direction, setDirection] = useState(0);
   const [viewportHeight, setViewportHeight] = useState(0);
-  
+
   const {
     currentStep,
     surveyData,
@@ -52,11 +52,11 @@ export default function SurveyPage() {
     const updateHeight = () => {
       setViewportHeight(window.innerHeight);
     };
-    
+
     updateHeight();
     window.addEventListener('resize', updateHeight);
     document.body.style.overflow = 'hidden';
-    
+
     return () => {
       window.removeEventListener('resize', updateHeight);
       document.body.style.overflow = '';
@@ -78,7 +78,7 @@ export default function SurveyPage() {
 
   if (isLoading) {
     return (
-      <div 
+      <div
         className="h-screen bg-brand-cream flex items-center justify-center"
         style={{ minHeight: '-webkit-fill-available' }}
       >
@@ -95,7 +95,7 @@ export default function SurveyPage() {
   }
 
   return (
-    <main 
+    <main
       className="h-screen bg-brand-cream flex flex-col overflow-hidden"
       style={{ minHeight: '-webkit-fill-available' }}
     >
@@ -109,7 +109,7 @@ export default function SurveyPage() {
       {/* Main Content - Full width, no card, fits in viewport */}
       <div className="flex-1 flex flex-col px-4 md:px-6 lg:px-8 py-4 md:py-6 overflow-hidden">
         <div className="flex-1 flex flex-col max-w-lg mx-auto w-full">
-          
+
           {/* Step Content */}
           <StepContainer
             currentStep={currentStep}
@@ -126,51 +126,41 @@ export default function SurveyPage() {
               >
                 {currentStep === 1 && (
                   <Step1
-                    relationship={surveyData.step1.relationship}
                     name={surveyData.step1.name}
-                    pronunciation={surveyData.step1.pronunciation}
+                    photo={surveyData.step1.photo}
                     errors={errors.step1}
-                    onRelationshipChange={(relationship) =>
-                      updateStep1({ relationship })
-                    }
                     onNameChange={(name) => updateStep1({ name })}
-                    onPronunciationChange={(pronunciation) =>
-                      updateStep1({ pronunciation })
-                    }
+                    onPhotoChange={(photo) => updateStep1({ photo })}
                   />
                 )}
 
                 {currentStep === 2 && (
                   <Step2
-                    genre={surveyData.step2.genre}
-                    customGenre={surveyData.step2.customGenre}
+                    songFile={surveyData.step2.songFile}
                     errors={errors.step2}
-                    onGenreChange={(genre) => updateStep2({ genre })}
-                    onCustomGenreChange={(customGenre) => updateStep2({ customGenre })}
+                    onSongFileChange={(songFile) => updateStep2({ songFile })}
                   />
                 )}
 
                 {currentStep === 3 && (
                   <Step3
-                    qualities={surveyData.step3.qualities}
+                    backgroundId={surveyData.step3.backgroundId}
                     errors={errors.step3}
-                    onQualitiesChange={(qualities) => updateStep3({ qualities })}
+                    onBackgroundChange={(backgroundId) => updateStep3({ backgroundId })}
                   />
                 )}
 
                 {currentStep === 4 && (
                   <Step4
-                    memories={surveyData.step4.memories}
+                    cardMessage={surveyData.step4.cardMessage}
                     errors={errors.step4}
-                    onMemoriesChange={(memories) => updateStep4({ memories })}
+                    onCardMessageChange={(cardMessage) => updateStep4({ cardMessage })}
                   />
                 )}
 
                 {currentStep === 5 && (
                   <Step5
-                    specialMessage={surveyData.step5.specialMessage}
-                    errors={errors.step5}
-                    onSpecialMessageChange={(specialMessage) => updateStep5({ specialMessage })}
+                    data={surveyData}
                   />
                 )}
               </motion.div>
@@ -186,7 +176,7 @@ export default function SurveyPage() {
             onBack={handlePrev}
             onNext={handleNext}
           />
-          
+
           {/* Terms Agreement - Only on page 1 */}
           {currentStep === 1 && (
             <p className="text-center text-xs text-brand-mocha-light mt-3">

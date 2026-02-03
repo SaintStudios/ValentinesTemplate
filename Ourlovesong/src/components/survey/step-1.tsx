@@ -7,47 +7,32 @@
 
 'use client';
 
-import { useCallback } from 'react';
+import { useCallback, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { useTranslation } from '@/hooks/useTranslation';
 import { cn } from '@/lib/utils';
-import {
-  Relationship,
-  RELATIONSHIP_ORDER,
-} from '@/types/survey';
-
 export interface Step1Props {
-  relationship: Relationship | null;
   name: string;
-  pronunciation?: string;
+  photo?: File | null;
   errors?: {
-    relationship?: string;
     name?: string;
+    photo?: string;
   };
-  onRelationshipChange: (relationship: Relationship) => void;
   onNameChange: (name: string) => void;
-  onPronunciationChange: (pronunciation: string) => void;
+  onPhotoChange: (file: File | null) => void;
   className?: string;
 }
 
 export function Step1({
-  relationship,
   name,
-  pronunciation = '',
+  photo,
   errors = {},
-  onRelationshipChange,
   onNameChange,
-  onPronunciationChange,
+  onPhotoChange,
   className = '',
 }: Step1Props) {
   const { t } = useTranslation();
-
-  const handleRelationshipSelect = useCallback(
-    (rel: Relationship) => {
-      onRelationshipChange(rel);
-    },
-    [onRelationshipChange]
-  );
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   const handleNameChange = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -56,12 +41,18 @@ export function Step1({
     [onNameChange]
   );
 
-  const handlePronunciationChange = useCallback(
+  const handleFileChange = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
-      onPronunciationChange(e.target.value);
+      if (e.target.files && e.target.files[0]) {
+        onPhotoChange(e.target.files[0]);
+      }
     },
-    [onPronunciationChange]
+    [onPhotoChange]
   );
+
+  const handleUploadClick = () => {
+    fileInputRef.current?.click();
+  };
 
   return (
     <motion.div
@@ -81,61 +72,6 @@ export function Step1({
         </p>
       </div>
 
-      {/* Relationship Selection */}
-      <div className="mb-4">
-        <label className="block text-base font-medium text-brand-espresso mb-2.5">
-          {t('survey.step1.relationship_label')}
-        </label>
-        
-        <div className="grid grid-cols-3 gap-2">
-          {RELATIONSHIP_ORDER.map((rel) => {
-            const isSelected = relationship === rel;
-            
-            return (
-              <motion.button
-                key={rel}
-                type="button"
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-                onClick={() => handleRelationshipSelect(rel)}
-                className={cn(
-                  'relative px-2 py-2.5 rounded-md border-2 text-sm font-medium',
-                  'transition-all duration-150',
-                  'focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-1',
-                  isSelected
-                    ? 'border-brand-gold bg-brand-gold/10 text-brand-espresso'
-                    : 'border-gray-200 bg-white text-brand-mocha hover:border-brand-gold/50'
-                )}
-              >
-                {t(`survey.relationships.${rel}`)}
-                
-                {isSelected && (
-                  <motion.div
-                    initial={{ scale: 0 }}
-                    animate={{ scale: 1 }}
-                    className="absolute -top-1.5 -right-1.5 w-4 h-4 bg-brand-gold rounded-full flex items-center justify-center"
-                  >
-                    <svg className="w-2.5 h-2.5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
-                    </svg>
-                  </motion.div>
-                )}
-              </motion.button>
-            );
-          })}
-        </div>
-        
-        {errors.relationship && (
-          <motion.p
-            initial={{ opacity: 0, y: -5 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="mt-1.5 text-xs text-brand-error"
-          >
-            {errors.relationship}
-          </motion.p>
-        )}
-      </div>
-
       {/* Name Input */}
       <div className="mb-4">
         <label
@@ -144,7 +80,7 @@ export function Step1({
         >
           {t('survey.step1.name_label')}
         </label>
-        
+
         <input
           id="recipient-name"
           type="text"
@@ -162,7 +98,7 @@ export function Step1({
               : 'border-gray-300'
           )}
         />
-        
+
         {errors.name && (
           <motion.p
             initial={{ opacity: 0, y: -5 }}
@@ -174,33 +110,51 @@ export function Step1({
         )}
       </div>
 
-      {/* Pronunciation - Optional */}
+      {/* Photo Upload */}
       <div className="mb-2">
         <label
-          htmlFor="pronunciation"
-          className="block text-sm text-brand-mocha mb-1"
+          className="block text-base font-medium text-brand-espresso mb-2"
         >
-          {t('survey.step1.pronunciation_label')}
+          {t('survey.step1.gf_image_label')}
         </label>
-        
-        <input
-          id="pronunciation"
-          type="text"
-          value={pronunciation}
-          onChange={handlePronunciationChange}
-          placeholder={t('survey.step1.pronunciation_placeholder')}
+
+        <div
+          onClick={handleUploadClick}
           className={cn(
-            'w-full px-4 py-2.5 text-sm',
-            'bg-white border border-gray-300 rounded-md',
-            'transition-all duration-150',
-            'placeholder:text-brand-mocha-light/70',
-            'focus:outline-none focus:ring-2 focus:ring-brand-gold/30 focus:border-brand-gold'
+            "w-full px-4 py-6 border-2 border-dashed rounded-md cursor-pointer transition-colors flex flex-col items-center justify-center text-center",
+            errors.photo ? "border-brand-error/50 bg-brand-error/5" : "border-gray-300 hover:border-brand-gold/50 hover:bg-white/50"
           )}
-        />
-        
-        <p className="mt-1 text-xs text-brand-mocha-light">
-          {t('survey.step1.pronunciation_tip')}
-        </p>
+        >
+          {photo ? (
+            <div className="flex items-center gap-2">
+              <span className="text-brand-success font-medium">Photo Selected: {photo.name}</span>
+            </div>
+          ) : (
+            <>
+              <svg className="w-8 h-8 text-brand-mocha-light mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+              </svg>
+              <span className="text-sm text-brand-mocha">Click to upload photo</span>
+            </>
+          )}
+          <input
+            ref={fileInputRef}
+            type="file"
+            accept="image/*"
+            className="hidden"
+            onChange={handleFileChange}
+          />
+        </div>
+
+        {errors.photo && (
+          <motion.p
+            initial={{ opacity: 0, y: -5 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="mt-1.5 text-xs text-brand-error"
+          >
+            {errors.photo}
+          </motion.p>
+        )}
       </div>
     </motion.div>
   );

@@ -13,27 +13,33 @@ import { useTranslation } from '@/hooks/useTranslation';
 import { cn } from '@/lib/utils';
 
 export interface Step3Props {
-  qualities: string;
+  backgroundId: string;
   errors?: {
-    qualities?: string;
+    backgroundId?: string;
   };
-  onQualitiesChange: (qualities: string) => void;
+  onBackgroundChange: (id: string) => void;
   className?: string;
 }
 
+const BACKGROUNDS = [
+  { id: 'paris', labelKey: 'survey.step3.background_options.paris', icon: '🗼' },
+  { id: 'beach', labelKey: 'survey.step3.background_options.beach', icon: '🏖️' },
+  { id: 'mountain', labelKey: 'survey.step3.background_options.mountain', icon: '⛰️' },
+];
+
 export function Step3({
-  qualities,
+  backgroundId,
   errors = {},
-  onQualitiesChange,
+  onBackgroundChange,
   className = '',
 }: Step3Props) {
   const { t } = useTranslation();
 
-  const handleQualitiesChange = useCallback(
-    (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-      onQualitiesChange(e.target.value);
+  const handleBackgroundSelect = useCallback(
+    (id: string) => {
+      onBackgroundChange(id);
     },
-    [onQualitiesChange]
+    [onBackgroundChange]
   );
 
   return (
@@ -54,40 +60,58 @@ export function Step3({
         </p>
       </div>
 
-      {/* Qualities Section */}
+      {/* Background Selection */}
       <div className="flex-1 flex flex-col">
-        <label
-          htmlFor="qualities"
-          className="block text-base font-medium text-brand-espresso mb-2"
-        >
-          {t('survey.step3.qualities_label')}
+        <label className="block text-base font-medium text-brand-espresso mb-2.5">
+          {t('survey.step3.background_label')}
         </label>
-        
-        <textarea
-          id="qualities"
-          value={qualities}
-          onChange={handleQualitiesChange}
-          placeholder={t('survey.step3.qualities_placeholder')}
-          rows={8}
-          className={cn(
-            'w-full px-4 py-3 text-base',
-            'bg-white border rounded-md resize-none',
-            'transition-all duration-150',
-            'placeholder:text-brand-mocha-light/80',
-            'focus:outline-none focus:ring-2 focus:ring-brand-gold/30 focus:border-brand-gold',
-            errors.qualities
-              ? 'border-brand-error focus:ring-brand-error/30'
-              : 'border-gray-300'
-          )}
-        />
-        
-        {errors.qualities && (
+
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+          {BACKGROUNDS.map((bg) => {
+            const isSelected = backgroundId === bg.id;
+
+            return (
+              <motion.button
+                key={bg.id}
+                type="button"
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                onClick={() => handleBackgroundSelect(bg.id)}
+                className={cn(
+                  'relative px-4 py-6 rounded-md border-2 text-base font-medium flex flex-col items-center gap-2',
+                  'transition-all duration-150',
+                  'focus:outline-none focus:ring-2 focus:ring-brand-gold focus:ring-offset-1',
+                  isSelected
+                    ? 'border-brand-gold bg-brand-gold/10 text-brand-espresso'
+                    : 'border-gray-200 bg-white text-brand-mocha hover:border-brand-gold/50'
+                )}
+              >
+                <span className="text-4xl">{bg.icon}</span>
+                <span className="text-brand-espresso font-serif">{t(bg.labelKey)}</span>
+
+                {isSelected && (
+                  <motion.div
+                    initial={{ scale: 0 }}
+                    animate={{ scale: 1 }}
+                    className="absolute top-2 right-2 w-5 h-5 bg-brand-gold rounded-full flex items-center justify-center shadow-sm"
+                  >
+                    <svg className="w-3 h-3 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
+                    </svg>
+                  </motion.div>
+                )}
+              </motion.button>
+            );
+          })}
+        </div>
+
+        {errors.backgroundId && (
           <motion.p
             initial={{ opacity: 0, y: -5 }}
             animate={{ opacity: 1, y: 0 }}
             className="mt-1.5 text-xs text-brand-error"
           >
-            {errors.qualities}
+            {errors.backgroundId}
           </motion.p>
         )}
       </div>

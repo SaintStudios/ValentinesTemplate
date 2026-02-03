@@ -16,7 +16,7 @@ export function createScene() {
 export function loadEnvironment(scene) {
     const loader = new THREE.TextureLoader();
     loader.load(
-        'luca-bravo-_QdFx92MO2U-unsplash.jpg',
+        'background_space_date.png',
         (texture) => {
             texture.colorSpace = THREE.SRGBColorSpace;
             texture.wrapS = THREE.RepeatWrapping;

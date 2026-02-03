@@ -124,6 +124,9 @@ export function HowItWorks() {
                 <h3 className="font-serif text-xl text-brand-espresso">
                   {t(`how_it_works.steps.${index}.title`)}
                 </h3>
+                <p className="text-brand-mocha mt-2 text-sm leading-relaxed">
+                  {t(`how_it_works.steps.${index}.description`)}
+                </p>
               </Card>
             </motion.div>
           ))}

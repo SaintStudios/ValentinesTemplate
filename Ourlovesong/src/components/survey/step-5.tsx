@@ -7,34 +7,31 @@
 
 'use client';
 
-import { useCallback } from 'react';
 import { motion } from 'framer-motion';
 import { useTranslation } from '@/hooks/useTranslation';
 import { cn } from '@/lib/utils';
+import { SurveyData } from '@/types/survey';
 
 export interface Step5Props {
-  specialMessage: string;
-  errors?: {
-    specialMessage?: string;
-  };
-  onSpecialMessageChange: (specialMessage: string) => void;
+  data: SurveyData;
   className?: string;
 }
 
 export function Step5({
-  specialMessage,
-  errors = {},
-  onSpecialMessageChange,
+  data,
   className = '',
 }: Step5Props) {
   const { t } = useTranslation();
 
-  const handleSpecialMessageChange = useCallback(
-    (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-      onSpecialMessageChange(e.target.value);
-    },
-    [onSpecialMessageChange]
-  );
+  const getBackgroundLabel = (id: string) => {
+    // This should ideally map from the same source as Step3
+    const map: Record<string, string> = {
+      paris: 'survey.step3.background_options.paris',
+      beach: 'survey.step3.background_options.beach',
+      mountain: 'survey.step3.background_options.mountain',
+    };
+    return map[id] ? t(map[id]) : id;
+  };
 
   return (
     <motion.div
@@ -54,42 +51,63 @@ export function Step5({
         </p>
       </div>
 
-      {/* Special Message Section */}
-      <div className="flex-1 flex flex-col">
-        <label
-          htmlFor="special-message"
-          className="block text-base font-medium text-brand-espresso mb-2"
-        >
-          {t('survey.step5.message_label')}
-        </label>
-        
-        <textarea
-          id="special-message"
-          value={specialMessage}
-          onChange={handleSpecialMessageChange}
-          placeholder={t('survey.step5.message_placeholder')}
-          rows={8}
-          className={cn(
-            'w-full px-4 py-3 text-base',
-            'bg-white border rounded-md resize-none',
-            'transition-all duration-150',
-            'placeholder:text-brand-mocha-light/80',
-            'focus:outline-none focus:ring-2 focus:ring-brand-gold/30 focus:border-brand-gold',
-            errors.specialMessage
-              ? 'border-brand-error focus:ring-brand-error/30'
-              : 'border-gray-300'
-          )}
-        />
-        
-        {errors.specialMessage && (
-          <motion.p
-            initial={{ opacity: 0, y: -5 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="mt-1.5 text-xs text-brand-error"
-          >
-            {errors.specialMessage}
-          </motion.p>
-        )}
+      {/* Review Section */}
+      <div className="flex-1 flex flex-col gap-4 overflow-y-auto pr-1">
+
+        {/* The Date */}
+        <div className="bg-white p-4 rounded-md border border-gray-200">
+          <h3 className="text-sm font-medium text-brand-mocha-light uppercase tracking-wider mb-2">
+            {t('survey.steps.step1')}
+          </h3>
+          <div className="grid grid-cols-2 gap-2 text-base">
+            <div>
+              <span className="text-brand-mocha block text-sm">Name</span>
+              <span className="text-brand-espresso font-medium">{data.step1.name}</span>
+            </div>
+            <div>
+              <span className="text-brand-mocha block text-sm">Photo</span>
+              <span className="text-brand-espresso font-medium truncate">
+                {data.step1.photo ? 'Uploaded' : 'None'}
+              </span>
+            </div>
+          </div>
+        </div>
+
+        {/* Music */}
+        <div className="bg-white p-4 rounded-md border border-gray-200">
+          <h3 className="text-sm font-medium text-brand-mocha-light uppercase tracking-wider mb-2">
+            {t('survey.steps.step2')}
+          </h3>
+          <div>
+            <span className="text-brand-mocha block text-sm">Song</span>
+            <span className="text-brand-espresso font-medium truncate">
+              {data.step2.songFile ? data.step2.songFile.name : 'None'}
+            </span>
+          </div>
+        </div>
+
+        {/* Scene */}
+        <div className="bg-white p-4 rounded-md border border-gray-200">
+          <h3 className="text-sm font-medium text-brand-mocha-light uppercase tracking-wider mb-2">
+            {t('survey.steps.step3')}
+          </h3>
+          <div>
+            <span className="text-brand-espresso font-medium">
+              {getBackgroundLabel(data.step3.backgroundId)}
+            </span>
+          </div>
+        </div>
+
+        {/* Message */}
+        <div className="bg-white p-4 rounded-md border border-gray-200">
+          <h3 className="text-sm font-medium text-brand-mocha-light uppercase tracking-wider mb-2">
+            {t('survey.steps.step4')}
+          </h3>
+          <p className="text-brand-espresso italic text-sm whitespace-pre-wrap">
+            "{data.step4.cardMessage}"
+          </p>
+        </div>
+
       </div>
     </motion.div>
   );

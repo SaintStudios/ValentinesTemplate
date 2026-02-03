@@ -25,20 +25,19 @@ const createEmptySurveyData = (): SurveyData => ({
   step1: {
     relationship: null,
     name: '',
-    pronunciation: '',
+    photo: null,
   },
   step2: {
-    genre: null,
-    customGenre: '',
+    songFile: null,
   },
   step3: {
-    qualities: '',
+    backgroundId: '',
   },
   step4: {
-    memories: '',
+    cardMessage: '',
   },
   step5: {
-    specialMessage: '',
+    confirmed: false,
   },
 });
 
@@ -53,9 +52,10 @@ const loadSurveyData = (): SurveyData => {
     if (stored) {
       const parsed = JSON.parse(stored);
       // Merge with defaults to ensure all fields exist
+      // Note: Files cannot be restored from localStorage, so we reset them to null
       return {
-        step1: { ...createEmptySurveyData().step1, ...parsed.step1 },
-        step2: { ...createEmptySurveyData().step2, ...parsed.step2 },
+        step1: { ...createEmptySurveyData().step1, ...parsed.step1, photo: null },
+        step2: { ...createEmptySurveyData().step2, ...parsed.step2, songFile: null },
         step3: { ...createEmptySurveyData().step3, ...parsed.step3 },
         step4: { ...createEmptySurveyData().step4, ...parsed.step4 },
         step5: { ...createEmptySurveyData().step5, ...parsed.step5 },
@@ -67,12 +67,18 @@ const loadSurveyData = (): SurveyData => {
   return createEmptySurveyData();
 };
 
-// Save survey data to localStorage
+// Save survey data to localStorage - excluding Files
 const saveSurveyData = (data: SurveyData): void => {
   if (typeof window === 'undefined') return;
 
   try {
-    localStorage.setItem(SURVEY_STORAGE_KEY, JSON.stringify(data));
+    // Create a copy without files for storage
+    const storageData = {
+      ...data,
+      step1: { ...data.step1, photo: undefined },
+      step2: { ...data.step2, songFile: undefined }
+    };
+    localStorage.setItem(SURVEY_STORAGE_KEY, JSON.stringify(storageData));
   } catch (error) {
     console.error('Failed to save survey data to localStorage:', error);
   }
@@ -95,13 +101,13 @@ export const clearSurveyData = (): void => {
 export function useSurvey() {
   // Current step (1-based, ranging from 1 to TOTAL_STEPS)
   const [currentStep, setCurrentStep] = useState<number>(1);
-  
+
   // Survey form data
   const [surveyData, setSurveyData] = useState<SurveyData>(createEmptySurveyData);
-  
+
   // Validation errors
   const [errors, setErrors] = useState<SurveyErrors>({});
-  
+
   // Loading state for persistence
   const [isLoading, setIsLoading] = useState(true);
 
@@ -196,12 +202,17 @@ export function useSurvey() {
     let isValid = true;
 
     if (!surveyData.step1.relationship) {
-      newErrors.relationship = 'Please select who this song is for';
+      newErrors.relationship = 'Please select who this is for';
       isValid = false;
     }
 
     if (!surveyData.step1.name.trim()) {
-      newErrors.name = 'Please enter their name';
+      newErrors.name = 'Please enter her name';
+      isValid = false;
+    }
+
+    if (!surveyData.step1.photo) {
+      newErrors.photo = 'Please upload a photo';
       isValid = false;
     }
 
@@ -213,8 +224,8 @@ export function useSurvey() {
     const newErrors: SurveyErrors['step2'] = {};
     let isValid = true;
 
-    if (!surveyData.step2.genre) {
-      newErrors.genre = 'Please select a genre';
+    if (!surveyData.step2.songFile) {
+      newErrors.songFile = 'Please upload a song';
       isValid = false;
     }
 
@@ -226,8 +237,8 @@ export function useSurvey() {
     const newErrors: SurveyErrors['step3'] = {};
     let isValid = true;
 
-    if (!surveyData.step3.qualities.trim()) {
-      newErrors.qualities = 'Please describe their qualities';
+    if (!surveyData.step3.backgroundId) {
+      newErrors.backgroundId = 'Please select a background';
       isValid = false;
     }
 
@@ -239,8 +250,8 @@ export function useSurvey() {
     const newErrors: SurveyErrors['step4'] = {};
     let isValid = true;
 
-    if (!surveyData.step4.memories.trim()) {
-      newErrors.memories = 'Please share your memories';
+    if (!surveyData.step4.cardMessage.trim()) {
+      newErrors.cardMessage = 'Please write a message';
       isValid = false;
     }
 
@@ -249,16 +260,7 @@ export function useSurvey() {
   }, [surveyData]);
 
   const validateStep5 = useCallback((): boolean => {
-    const newErrors: SurveyErrors['step5'] = {};
-    let isValid = true;
-
-    if (!surveyData.step5.specialMessage.trim()) {
-      newErrors.specialMessage = 'Please add a special message';
-      isValid = false;
-    }
-
-    setErrors((prev) => ({ ...prev, step5: newErrors }));
-    return isValid;
+    return true;
   }, [surveyData]);
 
   const validateCurrentStep = useCallback((): boolean => {
@@ -286,26 +288,23 @@ export function useSurvey() {
   const isStepValid = useCallback((): boolean => {
     switch (currentStep) {
       case 1:
-        return !!surveyData.step1.relationship && !!surveyData.step1.name.trim();
+        return !!surveyData.step1.relationship && !!surveyData.step1.name.trim() && !!surveyData.step1.photo;
       case 2:
-        return !!surveyData.step2?.genre;
+        return !!surveyData.step2.songFile;
       case 3:
-        const qualities = surveyData.step3?.qualities || '';
-        return !!qualities.trim();
+        return !!surveyData.step3.backgroundId;
       case 4:
-        const memories = surveyData.step4?.memories || '';
-        return !!memories.trim();
+        return !!surveyData.step4.cardMessage.trim();
       case 5:
-        const specialMessage = surveyData.step5?.specialMessage || '';
-        return !!specialMessage.trim();
+        return true;
       default:
         return false;
     }
   }, [surveyData, currentStep]);
 
-  const canProceed = useCallback((): boolean => {
-    return isStepValid();
-  }, [isStepValid]);
+  // Check valid on every step change to allow next button to be enabled/disabled if needed in real-time
+  // (Not used in current button logic but good for future)
+  const canProceed = isStepValid();
 
   return {
     // State
@@ -315,7 +314,7 @@ export function useSurvey() {
     isLoading,
     totalSteps: TOTAL_STEPS,
     progress: getProgress(),
-    canProceed: canProceed(),
+    canProceed,
     isFirstStep: currentStep === 1,
     isLastStep: currentStep === TOTAL_STEPS,
     // Navigation
@@ -334,4 +333,3 @@ export function useSurvey() {
     clearSurveyData,
   };
 }
-

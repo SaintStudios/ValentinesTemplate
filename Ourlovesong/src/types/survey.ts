@@ -6,43 +6,44 @@
  */
 
 // Relationship type with all available options
-export type Relationship = 
-  | 'husband' 
-  | 'wife' 
-  | 'children' 
-  | 'father' 
-  | 'mother' 
-  | 'sibling' 
-  | 'friend' 
-  | 'myself' 
+export type Relationship =
+  | 'husband'
+  | 'wife'
+  | 'children'
+  | 'father'
+  | 'mother'
+  | 'sibling'
+  | 'friend'
+  | 'myself'
   | 'other';
 
 // Step 1 data structure for recipient and name information
 export interface Step1Data {
   relationship: Relationship | null;
   name: string;
-  pronunciation?: string;
+  photo: File | null;
 }
 
-// Step 2 data structure for genre selection
+// Step 2 data structure for song upload
 export interface Step2Data {
-  genre: string | null;
-  customGenre: string;
+  songFile: File | null;
 }
 
-// Step 3 data structure for qualities
+// Step 3 data structure for background selection
 export interface Step3Data {
-  qualities: string;
+  backgroundId: string;
 }
 
-// Step 4 data structure for memories
+// Step 4 data structure for card message
 export interface Step4Data {
-  memories: string;
+  cardMessage: string;
 }
 
-// Step 5 data structure for special message
+// Step 5 data structure for review (no data needed really, just confirmation state?)
+// Or maybe we keep it empty for now or use it for additional notes if needed?
+// Let's keep it simple.
 export interface Step5Data {
-  specialMessage: string;
+  confirmed: boolean;
 }
 
 // Complete survey data combining all steps
@@ -59,18 +60,19 @@ export interface SurveyErrors {
   step1?: {
     relationship?: string;
     name?: string;
+    photo?: string;
   };
   step2?: {
-    genre?: string;
+    songFile?: string;
   };
   step3?: {
-    qualities?: string;
+    backgroundId?: string;
   };
   step4?: {
-    memories?: string;
+    cardMessage?: string;
   };
   step5?: {
-    specialMessage?: string;
+    confirmed?: string;
   };
 }
 
@@ -83,11 +85,11 @@ export interface SurveyStep {
 
 // Array of all survey steps for iteration
 export const SURVEY_STEPS: SurveyStep[] = [
-  { id: 1, name: 'Recipient', key: 'step1' },
-  { id: 2, name: 'Genre', key: 'step2' },
-  { id: 3, name: 'Story', key: 'step3' },
-  { id: 4, name: 'Preferences', key: 'step4' },
-  { id: 5, name: 'Delivery', key: 'step5' },
+  { id: 1, name: 'The Date', key: 'step1' },
+  { id: 2, name: 'Music', key: 'step2' },
+  { id: 3, name: 'Scene', key: 'step3' },
+  { id: 4, name: 'Message', key: 'step4' },
+  { id: 5, name: 'Review', key: 'step5' },
 ] as const;
 
 // Total number of steps in the survey
