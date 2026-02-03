@@ -24,21 +24,25 @@ export async function POST(req: NextRequest) {
             );
         }
 
-        // Get the model
-
+        // Get the model - using the latest Gemini 3 Flash Preview
         const model = genAI.getGenerativeModel({
-            model: 'gemini-2.5-flash',
+            model: 'gemini-3-flash-preview',
             generationConfig: {
-                maxOutputTokens: 50, // Force brevity to speed up generation
+                maxOutputTokens: 500,
                 temperature: 0.7,
             }
         });
 
-        // Construct a very simple system prompt for speed and genericness
-        const systemPrompt = `Write a short, generic, and sweet Valentine's Day card message based on this theme: "${prompt}".
-        Keep it under 30 words. One sentence is best. No formatting.`;
+        const promptText = `Write a cute, simple, and short Valentine's Day card message based on this input: "${prompt}".
+        Requirements:
+        1. Must be a complete sentence.
+        2. Must end with punctuation (. ! or ?).
+        3. Keep it under 50 words.
+        4. No quotes.`;
 
-        const result = await model.generateContent(systemPrompt);
+        const result = await model.generateContent({
+            contents: [{ role: 'user', parts: [{ text: promptText }] }],
+        });
         const response = await result.response;
         const text = response.text();
 
@@ -47,9 +51,6 @@ export async function POST(req: NextRequest) {
         console.error('Error generating message:', error);
         // Log environment variable status (don't log the full key for security)
         console.log('API Key configured:', !!process.env.GOOGLE_API_KEY);
-        if (process.env.GOOGLE_API_KEY) {
-            console.log('API Key length:', process.env.GOOGLE_API_KEY.length);
-        }
 
         return NextResponse.json(
             {
