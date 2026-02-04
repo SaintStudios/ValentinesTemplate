@@ -66,7 +66,7 @@
   },
   "testimonials": {
     "title": "Moments That Melted Hearts",
-    "subtitle": "Hear from boyfriends who made this Valentine's Day unforgettable.",
+    "subtitle": "Hear from boyfriends who made their Valentine's Day unforgettable.",
     "stats": "Over 500 date nights created",
     "items": [
       {
@@ -122,7 +122,7 @@
       },
       {
         "question": "Can I change the song later?",
-        "answer": "Yes, you can edit your date space details up to 24 hours after creation."
+        "answer": "No, you cannot edit your date space details after creation."
       },
       {
         "question": "Is it private?",
@@ -131,6 +131,10 @@
       {
         "question": "What if I don't have a Spotify or Apple Music account?",
         "answer": "You can still use any public song link from these platforms. If you can't find the song there, please contact us and we'll help you out."
+      },
+      {
+        "question": "How do I receive my date space link?",
+        "answer": "You will receive it 24 hours after purchase, or instantly in 5 minutes if you choose the instant shipping option at checkout."
       }
     ]
   },

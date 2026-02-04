@@ -78,7 +78,7 @@ export function HowItWorks() {
       {/* Background Image */}
       <div className="absolute inset-0 z-0">
         <img
-          src="/assets/6dca4e4f-c59a-4e34-8740-43ac3c1c9c62.png"
+          src="/assets/how_it_works_bg.png"
           alt="Background"
           className="w-full h-full object-cover"
         />

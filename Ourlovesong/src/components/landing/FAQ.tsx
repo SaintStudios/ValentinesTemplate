@@ -47,7 +47,7 @@ export function FAQ() {
   };
 
   return (
-    <Section variant="gold" size="lg" id="faq">
+    <Section variant="cream" size="lg" id="faq">
       <div className="container mx-auto px-4 max-w-3xl">
         {/* Section Header */}
         <motion.div
