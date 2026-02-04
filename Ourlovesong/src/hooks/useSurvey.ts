@@ -38,6 +38,7 @@ const createEmptySurveyData = (): SurveyData => ({
   },
   step5: {
     confirmed: false,
+    email: '',
   },
 });
 
@@ -255,7 +256,19 @@ export function useSurvey() {
   }, [surveyData]);
 
   const validateStep5 = useCallback((): boolean => {
-    return true;
+    const newErrors: SurveyErrors['step5'] = {};
+    let isValid = true;
+
+    if (!surveyData.step5.email.trim()) {
+      newErrors.email = 'Please enter your email';
+      isValid = false;
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(surveyData.step5.email)) {
+      newErrors.email = 'Please enter a valid email address';
+      isValid = false;
+    }
+
+    setErrors((prev) => ({ ...prev, step5: newErrors }));
+    return isValid;
   }, [surveyData]);
 
   const validateCurrentStep = useCallback((): boolean => {
@@ -291,7 +304,7 @@ export function useSurvey() {
       case 4:
         return !!surveyData.step4.cardMessage.trim();
       case 5:
-        return true;
+        return !!surveyData.step5.email.trim() && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(surveyData.step5.email);
       default:
         return false;
     }

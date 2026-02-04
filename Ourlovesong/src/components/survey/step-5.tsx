@@ -10,12 +10,14 @@
 import { motion } from 'framer-motion';
 import { useTranslation } from '@/hooks/useTranslation';
 import { cn } from '@/lib/utils';
-import { SurveyData } from '@/types/survey';
+import { SurveyData, SurveyErrors } from '@/types/survey';
 
 export interface Step5Props {
   data: SurveyData;
   instantDelivery?: boolean;
   onInstantDeliveryChange?: (value: boolean) => void;
+  onEmailChange?: (email: string) => void;
+  errors?: SurveyErrors['step5'];
   className?: string;
 }
 
@@ -23,6 +25,8 @@ export function Step5({
   data,
   instantDelivery = false,
   onInstantDeliveryChange,
+  onEmailChange,
+  errors,
   className = '',
 }: Step5Props) {
   const { t } = useTranslation();
@@ -53,6 +57,32 @@ export function Step5({
         <p className="text-base text-brand-mocha mt-1">
           {t('survey.step5.subheading')}
         </p>
+      </div>
+
+      {/* Email Input Section */}
+      <div className="flex-shrink-0 px-2 mb-4">
+        <label htmlFor="email" className="block text-sm font-medium text-brand-espresso mb-1">
+          Your Email <span className="text-red-500">*</span>
+        </label>
+        <p className="text-xs text-brand-mocha-light mb-2">
+          We'll send your custom 3D date link here shortly.
+        </p>
+        <input
+          type="email"
+          id="email"
+          value={data.step5.email}
+          onChange={(e) => onEmailChange?.(e.target.value)}
+          placeholder="name@example.com"
+          className={cn(
+            "w-full px-4 py-3 rounded-lg border focus:ring-2 focus:ring-brand-gold focus:border-transparent outline-none transition-all placeholder:text-gray-400 bg-white",
+            errors?.email ? "border-red-500" : "border-gray-200"
+          )}
+        />
+        {errors?.email && (
+          <p className="mt-1 text-xs text-red-500 font-medium animate-in slide-in-from-top-1">
+            {errors.email}
+          </p>
+        )}
       </div>
 
       {/* Review Section */}

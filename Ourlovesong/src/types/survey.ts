@@ -39,11 +39,10 @@ export interface Step4Data {
   cardMessage: string;
 }
 
-// Step 5 data structure for review (no data needed really, just confirmation state?)
-// Or maybe we keep it empty for now or use it for additional notes if needed?
-// Let's keep it simple.
+// Step 5 data structure for review and contact info
 export interface Step5Data {
   confirmed: boolean;
+  email: string;
 }
 
 // Complete survey data combining all steps
@@ -73,6 +72,7 @@ export interface SurveyErrors {
   };
   step5?: {
     confirmed?: string;
+    email?: string;
   };
 }
 

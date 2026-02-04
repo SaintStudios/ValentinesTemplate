@@ -78,6 +78,7 @@ export default function SurveyPage() {
           cardMessage: surveyData.step4.cardMessage,
           songLink: surveyData.step2.songLink,
           instantDelivery,
+          email: surveyData.step5.email,
         }),
       });
 
@@ -187,6 +188,8 @@ export default function SurveyPage() {
                 data={surveyData}
                 instantDelivery={instantDelivery}
                 onInstantDeliveryChange={setInstantDelivery}
+                onEmailChange={(email) => updateStep5({ email })}
+                errors={errors.step5}
               />
             )}
           </StepContainer>
