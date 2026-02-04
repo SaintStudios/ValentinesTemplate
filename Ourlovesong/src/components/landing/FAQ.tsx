@@ -47,7 +47,7 @@ export function FAQ() {
   };
 
   return (
-    <Section variant="paper" size="lg" id="faq">
+    <Section variant="gold" size="lg" id="faq">
       <div className="container mx-auto px-4 max-w-3xl">
         {/* Section Header */}
         <motion.div
@@ -89,9 +89,8 @@ export function FAQ() {
                     {question}
                   </span>
                   <svg
-                    className={`w-5 h-5 text-brand-gold flex-shrink-0 transition-transform duration-200 ${
-                      openIndex === index ? "rotate-180" : ""
-                    }`}
+                    className={`w-5 h-5 text-brand-gold flex-shrink-0 transition-transform duration-200 ${openIndex === index ? "rotate-180" : ""
+                      }`}
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"

@@ -1,8 +1,9 @@
 "use client";
 
+import { useState, useEffect } from "react";
+
 import { useTranslation } from "@/hooks/useTranslation";
 import Link from "next/link";
-import Image from "next/image";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/Button";
 import { Section } from "@/components/ui/Section";
@@ -31,6 +32,31 @@ const itemVariants = {
 
 export function Hero() {
   const { t } = useTranslation();
+  const [timeLeft, setTimeLeft] = useState({ minutes: 45, seconds: 0 });
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+    // Random duration between 20 and 60 minutes
+    const duration = (Math.floor(Math.random() * (60 - 20 + 1)) + 20) * 60;
+    const endTime = Date.now() + duration * 1000;
+
+    const timer = setInterval(() => {
+      const now = Date.now();
+      const diff = endTime - now;
+
+      if (diff <= 0) {
+        clearInterval(timer);
+        setTimeLeft({ minutes: 0, seconds: 0 });
+      } else {
+        const minutes = Math.floor((diff / 1000 / 60) % 60);
+        const seconds = Math.floor((diff / 1000) % 60);
+        setTimeLeft({ minutes, seconds });
+      }
+    }, 1000);
+
+    return () => clearInterval(timer);
+  }, []);
 
   return (
     <Section variant="cream" size="xl" className="pt-20 lg:pt-24">
@@ -88,41 +114,37 @@ export function Hero() {
             </a>
           </motion.div>
 
-          {/* Featured Testimonial */}
+          {/* Pricing & Offer */}
           <motion.div
             variants={itemVariants}
-            className="max-w-2xl mx-auto"
+            className="max-w-xl mx-auto"
           >
-            <div className="card p-6 lg:p-8">
-              <div className="flex items-center justify-center mb-4">
-                {[1, 2, 3, 4, 5].map((star) => (
-                  <svg
-                    key={star}
-                    className="w-5 h-5 text-brand-gold"
-                    fill="currentColor"
-                    viewBox="0 0 20 20"
-                  >
-                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                  </svg>
-                ))}
+            <div className="card p-6 lg:p-8 relative overflow-hidden">
+              {/* Valentine's Badge */}
+              <div className="absolute top-0 left-1/2 -translate-x-1/2 bg-brand-gold text-white px-4 py-1 rounded-b-lg text-sm font-medium tracking-wide shadow-sm whitespace-nowrap">
+                Valentine's Special 2026
               </div>
-              <blockquote className="text-lg text-brand-espresso italic mb-4">
-                "{t("hero.testimonial.quote")}"
-              </blockquote>
-              <div className="flex items-center justify-center gap-3">
-                <div className="w-10 h-10 rounded-full overflow-hidden flex-shrink-0">
-                  <Image
-                    src="/assets/images/profile images/4e889fe8-acf6-4fe3-a99f-d80dfd2e3e77.png"
-                    alt={t("hero.testimonial.author")}
-                    width={40}
-                    height={40}
-                    className="object-cover w-full h-full"
-                  />
+
+              <div className="mt-6 flex flex-col items-center justify-center">
+                <div className="flex items-baseline justify-center gap-4 mb-2">
+                  <span className="text-5xl sm:text-6xl text-brand-mocha/40 line-through font-serif decoration-2">
+                    99,99 €
+                  </span>
+                  <span className="text-3xl sm:text-4xl font-serif text-brand-espresso font-bold">
+                    16,99 €
+                  </span>
                 </div>
-                <div className="text-left">
-                  <p className="font-medium text-brand-espresso leading-none">{t("hero.testimonial.author")}</p>
-                  <p className="text-sm text-brand-mocha -mt-1 leading-none">{t("hero.testimonial.song_title")}</p>
-                </div>
+
+                {mounted && (
+                  <div className="flex items-center gap-2 text-rose-600 font-medium animate-pulse mt-6">
+                    <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    <span>
+                      Offer ends in {String(timeLeft.minutes).padStart(2, '0')}:{String(timeLeft.seconds).padStart(2, '0')}
+                    </span>
+                  </div>
+                )}
               </div>
             </div>
           </motion.div>

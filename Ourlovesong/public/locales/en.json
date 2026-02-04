@@ -7,7 +7,7 @@
   },
   "hero": {
     "badge": "#1 Virtual Valentine's Gift",
-    "title": "A Romantic 3D Date Night, Given With Love",
+    "title": "A 3D Date Night, Personalized Just for you",
     "subtitle": "Create a personalized 3D virtual date space with her favorite song, photos, and a heartfelt message.",
     "cta_primary": "Create Date Space",
     "cta_secondary": "View Examples",
@@ -165,10 +165,10 @@
     "step1": {
       "heading": "Let's start with her",
       "subheading": "Who is this lucky lady?",
-      "name_label": "What is your Girlfriend's Name?",
+      "name_label": "What's her name?",
       "name_placeholder": "Enter her name",
       "gf_image_label": "Upload a photo of her (or you two)",
-      "privacy_note": "Don't worry, it's 100% private",
+      "privacy_note": "will be framed and placed onto the table in your 3d world...",
       "validation": {
         "name_required": "Please enter her name",
         "image_required": "Please upload a photo"
@@ -176,7 +176,7 @@
     },
     "step2": {
       "heading": "Set the Mood",
-      "subheading": "Paste a Spotify or Apple Music link to your song",
+      "subheading": "Paste a Spotify or Apple Music link to her favourite song",
       "song_label": "Song Link",
       "validation": {
         "song_required": "Please paste a music link"

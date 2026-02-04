@@ -149,20 +149,7 @@ export function GiftCategories() {
     <Section variant="cream" size="lg">
       <div className="container mx-auto px-4">
         {/* Section Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-16"
-        >
-          <h2 className="font-serif text-3xl sm:text-4xl text-brand-espresso mb-4">
-            {t("categories.title")}
-          </h2>
-          <p className="text-lg text-brand-mocha max-w-2xl mx-auto">
-            {t("categories.subtitle")}
-          </p>
-        </motion.div>
+
 
         {/* Category Grid */}
         <motion.div

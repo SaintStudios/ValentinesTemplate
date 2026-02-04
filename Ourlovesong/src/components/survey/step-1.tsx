@@ -157,7 +157,7 @@ export function Step1({
         )}
 
         {/* Privacy Note */}
-        <p className="mt-3 text-center text-[10px] text-brand-mocha/60 italic">
+        <p className="mt-3 text-center text-sm text-brand-mocha/60 italic">
           {t('survey.step1.privacy_note')}
         </p>
       </div>

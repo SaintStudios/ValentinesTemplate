@@ -60,29 +60,31 @@ export function Step5({
       </div>
 
       {/* Email Input Section */}
-      <div className="flex-shrink-0 px-2 mb-4">
-        <label htmlFor="email" className="block text-sm font-medium text-brand-espresso mb-1">
-          Your Email <span className="text-red-500">*</span>
-        </label>
-        <p className="text-xs text-brand-mocha-light mb-2">
-          We'll send your custom 3D date link here shortly.
-        </p>
-        <input
-          type="email"
-          id="email"
-          value={data.step5.email}
-          onChange={(e) => onEmailChange?.(e.target.value)}
-          placeholder="name@example.com"
-          className={cn(
-            "w-full px-4 py-3 rounded-lg border focus:ring-2 focus:ring-brand-gold focus:border-transparent outline-none transition-all placeholder:text-gray-400 bg-white",
-            errors?.email ? "border-red-500" : "border-gray-200"
-          )}
-        />
-        {errors?.email && (
-          <p className="mt-1 text-xs text-red-500 font-medium animate-in slide-in-from-top-1">
-            {errors.email}
+      <div className="flex-shrink-0 pr-1 mb-3">
+        <div className="bg-white rounded-md border border-gray-200 p-3">
+          <label htmlFor="email" className="block text-xs font-medium text-brand-mocha-light uppercase tracking-wider mb-1">
+            Your Email <span className="text-red-500">*</span>
+          </label>
+          <p className="text-sm text-brand-mocha mb-2">
+            We'll send your custom 3D date link here shortly.
           </p>
-        )}
+          <input
+            type="email"
+            id="email"
+            value={data.step5.email}
+            onChange={(e) => onEmailChange?.(e.target.value)}
+            placeholder="name@example.com"
+            className={cn(
+              "w-full px-3 py-2 rounded-md border focus:ring-2 focus:ring-brand-gold focus:border-transparent outline-none transition-all placeholder:text-gray-400 bg-gray-50",
+              errors?.email ? "border-red-500" : "border-gray-200"
+            )}
+          />
+          {errors?.email && (
+            <p className="mt-1 text-xs text-red-500 font-medium animate-in slide-in-from-top-1">
+              {errors.email}
+            </p>
+          )}
+        </div>
       </div>
 
       {/* Review Section */}

@@ -33,12 +33,12 @@ export async function POST(req: NextRequest) {
             }
         });
 
-        const promptText = `Write a cute, simple, and short Valentine's Day card message based on this input: "${prompt}".
+        const promptText = `Write a heartfelt Valentine's Day card message based on this input: "${prompt}".
         Requirements:
-        1. Must be a complete sentence.
-        2. Must end with punctuation (. ! or ?).
-        3. Keep it under 50 words.
-        4. No quotes.`;
+        1. Write 2-3 sentences to make it feel like a real letter.
+        2. Make it express deep feelings but keep it cute.
+        3. Must include a closing phrase at the end like "Happy Valentine's Day" or similar.
+        4. No quotes around the output.`;
 
         const result = await model.generateContent({
             contents: [{ role: 'user', parts: [{ text: promptText }] }],

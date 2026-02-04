@@ -4,7 +4,7 @@ import { HTMLAttributes, forwardRef } from "react";
 import { motion } from "framer-motion";
 
 export interface SectionProps extends HTMLAttributes<HTMLDivElement> {
-  variant?: "default" | "cream" | "paper" | "dark";
+  variant?: "default" | "cream" | "paper" | "dark" | "gold";
   size?: "sm" | "md" | "lg" | "xl";
   children: React.ReactNode;
 }
@@ -25,6 +25,7 @@ export const Section = forwardRef<HTMLDivElement, SectionProps>(
       cream: "bg-brand-cream",
       paper: "bg-brand-paper",
       dark: "bg-brand-espresso",
+      gold: "bg-brand-gold-light",
     };
 
     const sizeStyles = {
