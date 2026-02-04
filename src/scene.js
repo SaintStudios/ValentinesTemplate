@@ -16,7 +16,7 @@ export function createScene() {
 export function loadEnvironment(scene) {
     const loader = new THREE.TextureLoader();
     loader.load(
-        'background_space_date.png',
+        'marek-piwnicki-J9RF6CtW_Q0-unsplash.jpg',
         (texture) => {
             texture.colorSpace = THREE.SRGBColorSpace;
             texture.wrapS = THREE.RepeatWrapping;

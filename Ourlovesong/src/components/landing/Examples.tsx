@@ -11,6 +11,7 @@ interface SongExample {
   title: string;
   category: string;
   duration: string;
+  image?: string;
 }
 
 const containerVariants = {
@@ -41,7 +42,7 @@ export function Examples() {
 
   // Generate date space examples from translations
   const songExamples: SongExample[] = [
-    { title: t("examples.items.0.title"), category: t("examples.items.0.category"), duration: t("examples.items.0.duration") },
+    { title: t("examples.items.0.title"), category: t("examples.items.0.category"), duration: t("examples.items.0.duration"), image: "/assets/example-space-1.png" },
     { title: t("examples.items.1.title"), category: t("examples.items.1.category"), duration: t("examples.items.1.duration") },
     { title: t("examples.items.2.title"), category: t("examples.items.2.category"), duration: t("examples.items.2.duration") },
     { title: t("examples.items.3.title"), category: t("examples.items.3.category"), duration: t("examples.items.3.duration") },
@@ -77,16 +78,24 @@ export function Examples() {
           {songExamples.map((song, idx) => (
             <motion.div key={idx} variants={itemVariants}>
               <Card variant="elevated" padding="md" className="h-full">
-                {/* Placeholder Album Art */}
+                {/* Album Art / Image */}
                 <div className="aspect-square bg-brand-cream-dark rounded-lg mb-4 flex items-center justify-center relative overflow-hidden">
                   <div className="absolute inset-0 bg-gradient-to-br from-brand-gold/20 to-brand-espresso/10" />
-                  <svg
-                    className="w-16 h-16 text-brand-gold/50"
-                    fill="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z" />
-                  </svg>
+                  {song.image ? (
+                    <img
+                      src={song.image}
+                      alt={song.title}
+                      className="w-full h-full object-cover relative z-10"
+                    />
+                  ) : (
+                    <svg
+                      className="w-16 h-16 text-brand-gold/50 relative z-10"
+                      fill="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z" />
+                    </svg>
+                  )}
                 </div>
 
                 {/* Song Info */}
