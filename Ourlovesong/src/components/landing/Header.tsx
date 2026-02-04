@@ -40,7 +40,7 @@ export function Header() {
           {/* Logo */}
           <Link href="/" className="flex items-center space-x-2">
             <span className="font-serif text-2xl lg:text-3xl text-brand-espresso font-semibold">
-              OurLoveSong.co
+              Our3DDate
             </span>
           </Link>
 

@@ -39,13 +39,15 @@ export function Footer() {
             <div className="col-span-2 md:col-span-4 lg:col-span-1">
               <Link href="/" className="block mb-4">
                 <span className="font-serif text-2xl text-brand-cream font-semibold">
-                  OurLoveSong.co
+                  Our3DDate
                 </span>
               </Link>
               <p className="text-brand-mocha-light text-sm leading-relaxed mb-6">
-                A radio-quality, custom song crafted with love in 7 days—delivered to your inbox.
+                Create a personalized 3D virtual date space with her favorite song, photos, and a heartfelt message.
+                Experience the future of digital gifting with Our3DDate.
               </p>
               {/* Social Links */}
+// ... (social links remain same)
               <div className="flex gap-4">
                 {footerLinks.social.map((social) => (
                   <a
@@ -132,11 +134,11 @@ export function Footer() {
           <div className="border-t border-brand-espresso-light pt-8">
             <div className="flex flex-col md:flex-row items-center justify-between gap-4">
               <p className="text-brand-mocha-light text-sm text-center md:text-left">
-                2025 OurLoveSong.co. All rights reserved.
+                © 2025 Our3DDate. All rights reserved.
               </p>
               <div className="flex items-center gap-4">
                 <span className="text-brand-mocha-light text-sm">
-                  Made with love
+                  Handcrafted for 2025 Valentines
                 </span>
                 <svg
                   className="w-5 h-5 text-brand-gold animate-pulse-soft"

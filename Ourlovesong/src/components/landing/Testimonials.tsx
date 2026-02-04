@@ -2,9 +2,9 @@
 
 import { useTranslation } from "@/hooks/useTranslation";
 import { motion } from "framer-motion";
-import Image from "next/image";
 import { Section } from "@/components/ui/Section";
 import { Card } from "@/components/ui/Card";
+import { cn } from "@/lib/utils";
 
 interface Testimonial {
   id: string;
@@ -12,8 +12,16 @@ interface Testimonial {
   author: string;
   songTitle: string;
   initials: string;
-  image: string;
 }
+
+const AVATAR_COLORS = [
+  "bg-blue-100 text-blue-600",
+  "bg-purple-100 text-purple-600",
+  "bg-pink-100 text-pink-600",
+  "bg-amber-100 text-amber-600",
+  "bg-emerald-100 text-emerald-600",
+  "bg-rose-100 text-rose-600",
+];
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -40,15 +48,13 @@ export function Testimonials() {
   const { t } = useTranslation();
 
   // Generate testimonials from translations
-  // Profile images from public/assets/images/profile images/
-  // All images are unique and not used in Hero section
   const testimonials: Testimonial[] = [
-    { id: "1", quote: t("testimonials.items.0.quote"), author: t("testimonials.items.0.author"), songTitle: t("testimonials.items.0.song_title"), initials: t("testimonials.items.0.initials"), image: "/assets/images/profile images/cae16174-3429-435a-af2f-67ca56179eb4.png" },
-    { id: "2", quote: t("testimonials.items.1.quote"), author: t("testimonials.items.1.author"), songTitle: t("testimonials.items.1.song_title"), initials: t("testimonials.items.1.initials"), image: "/assets/images/profile images/8464a72f-7258-47b4-ae93-2b1457d1b533.png" },
-    { id: "3", quote: t("testimonials.items.2.quote"), author: t("testimonials.items.2.author"), songTitle: t("testimonials.items.2.song_title"), initials: t("testimonials.items.2.initials"), image: "/assets/images/profile images/f834cd22-a7eb-4f99-955c-b9ee43337dcd.png" },
-    { id: "4", quote: t("testimonials.items.3.quote"), author: t("testimonials.items.3.author"), songTitle: t("testimonials.items.3.song_title"), initials: t("testimonials.items.3.initials"), image: "/assets/images/profile images/85b5f136-a27e-495f-a88b-ae7ba1e7200e.png" },
-    { id: "5", quote: t("testimonials.items.4.quote"), author: t("testimonials.items.4.author"), songTitle: t("testimonials.items.4.song_title"), initials: t("testimonials.items.4.initials"), image: "/assets/images/profile images/cc027ace-b0cc-48a2-a921-c0cff52eac92.png" },
-    { id: "6", quote: t("testimonials.items.5.quote"), author: t("testimonials.items.5.author"), songTitle: t("testimonials.items.5.song_title"), initials: t("testimonials.items.5.initials"), image: "/assets/images/profile images/444bd377-5776-4685-8964-bef13a6c9a27.png" },
+    { id: "1", quote: t("testimonials.items.0.quote"), author: t("testimonials.items.0.author"), songTitle: t("testimonials.items.0.song_title"), initials: t("testimonials.items.0.initials") },
+    { id: "2", quote: t("testimonials.items.1.quote"), author: t("testimonials.items.1.author"), songTitle: t("testimonials.items.1.song_title"), initials: t("testimonials.items.1.initials") },
+    { id: "3", quote: t("testimonials.items.2.quote"), author: t("testimonials.items.2.author"), songTitle: t("testimonials.items.2.song_title"), initials: t("testimonials.items.2.initials") },
+    { id: "4", quote: t("testimonials.items.3.quote"), author: t("testimonials.items.3.author"), songTitle: t("testimonials.items.3.song_title"), initials: t("testimonials.items.3.initials") },
+    { id: "5", quote: t("testimonials.items.4.quote"), author: t("testimonials.items.4.author"), songTitle: t("testimonials.items.4.song_title"), initials: t("testimonials.items.4.initials") },
+    { id: "6", quote: t("testimonials.items.5.quote"), author: t("testimonials.items.5.author"), songTitle: t("testimonials.items.5.song_title"), initials: t("testimonials.items.5.initials") },
   ];
 
   return (
@@ -56,11 +62,7 @@ export function Testimonials() {
       <div className="container mx-auto px-4">
         {/* Section Header */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-16"
+        // ... (rest of the header remains same)
         >
           <h2 className="font-serif text-3xl sm:text-4xl text-brand-espresso mb-4">
             {t("testimonials.title")}
@@ -71,6 +73,7 @@ export function Testimonials() {
         </motion.div>
 
         {/* Stats */}
+// ... (rest of stats remains same)
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -100,7 +103,7 @@ export function Testimonials() {
           viewport={{ once: true }}
           className="grid md:grid-cols-2 lg:grid-cols-3 gap-6"
         >
-          {testimonials.map((testimonial) => (
+          {testimonials.map((testimonial, index) => (
             <motion.div key={testimonial.id} variants={itemVariants}>
               <Card variant="default" padding="md" className="h-full">
                 {/* Stars */}
@@ -124,14 +127,11 @@ export function Testimonials() {
 
                 {/* Author */}
                 <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-full overflow-hidden flex-shrink-0">
-                    <Image
-                      src={testimonial.image}
-                      alt={testimonial.author}
-                      width={40}
-                      height={40}
-                      className="object-cover w-full h-full"
-                    />
+                  <div className={cn(
+                    "w-10 h-10 rounded-full flex items-center justify-center font-bold text-xs flex-shrink-0",
+                    AVATAR_COLORS[index % AVATAR_COLORS.length]
+                  )}>
+                    {testimonial.initials}
                   </div>
                   <div>
                     <p className="font-medium text-brand-espresso text-sm">
